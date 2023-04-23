@@ -3,7 +3,16 @@ import '../App.css';
 import { Button } from './Button';
 import './HeroSection.css';
 
+import { useNavigate } from 'react-router-dom';
+
 function HeroSection() {
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    // Perform any necessary login actions
+    navigate('/dashboard');
+  };
+
   return (
     <div className='hero-container'>
       <video src='/videos/video-3.mp4' autoPlay loop muted />
@@ -13,15 +22,17 @@ function HeroSection() {
         <Button
           className='btns'
           buttonStyle='btn--outline'
-          buttonSize='btn--large'>
-          Register
+          buttonSize='btn--large'
+          onClick={handleLogin}
+        >
+          Login
         </Button>
         <Button
           className='btns'
-          buttonStyle='btn--primary'
+          buttonStyle='btn--outline'
           buttonSize='btn--large'
-          onClick={console.log('hey')} >
-          Login
+        >
+          Register
         </Button>
       </div>
     </div>

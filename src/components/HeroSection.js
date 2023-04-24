@@ -10,7 +10,7 @@ function HeroSection() {
 
   const handleLogin = () => {
     // Perform any necessary login actions
-    navigate('/dashboard');
+    navigate('/login');
   };
 
   return (

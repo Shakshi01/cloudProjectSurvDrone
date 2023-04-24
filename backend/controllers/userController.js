@@ -5,6 +5,7 @@ const jwt=require('jsonwebtoken');
 
 const signup=async(req,res,next)=>{
     const {firstname,lastname,email,password,role,contact,location,gender,age}=req.body;
+    console.log(firstname,lastname,email,password,role,contact,location,gender,age);
     let existingUser;
     try{
         existingUser=await User.findOne({email:email});
@@ -52,8 +53,9 @@ const login=async(req,res,next)=>{
         console.log("user not found");
         return res.status(300).json({message:"User not found."})
     }
-    const isPasswordCorrect= bcrypt.compareSync(bcrypt.hashSync(password),existingUser?.password);
+    const isPasswordCorrect= bcrypt.compareSync(password,existingUser?.password);
     if(!isPasswordCorrect){
+        console.log("Incorrect Password");
         return res.status(500).json({message:"Please check your password"})
     }
     const token=jwt.sign({id:existingUser._id},"gautam",{

@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import './RegisterPage.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
   const [firstname, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -16,7 +19,24 @@ const RegisterPage = () => {
     e.preventDefault();
     console.log(`Name: ${firstname}, Email: ${email}, Password: ${password}`);
     // Perform registration logic here, and handle routing upon successful registration.
+    sendRequest().then(()=>navigate("/login"));
   };
+
+  const sendRequest=async()=>{
+      const res=await axios.post('http://localhost:5001/api/signup',{
+          firstname:firstname,
+          lastname:lastname,
+          email:email,
+          password:password,
+          role:role,
+          contact:contact,
+          location:location,
+          gender:gender,
+          age:age
+      },{withCredentials: true}).catch(err=>console.log(err))
+      const data=await res.data;
+      return data;
+  }
 
   return (
     <div className="register-container">

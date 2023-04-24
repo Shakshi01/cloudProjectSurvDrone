@@ -13,6 +13,11 @@ function HeroSection() {
     navigate('/login');
   };
 
+  const handleRegister = () => {
+    // Perform any necessary login actions
+    navigate('/register');
+  };
+
   return (
     <div className='hero-container'>
       <video src='/videos/video-3.mp4' autoPlay loop muted />
@@ -31,6 +36,7 @@ function HeroSection() {
           className='btns'
           buttonStyle='btn--outline'
           buttonSize='btn--large'
+          onClick={handleRegister}
         >
           Register
         </Button>

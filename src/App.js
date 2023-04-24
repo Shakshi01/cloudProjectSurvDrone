@@ -6,6 +6,7 @@ import Home from './components/pages/Home';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import LoginPage from './components/pages/LoginPage';
+import RegisterPage from './components/pages/RegisterPage';
 
 
 import App2 from './App2Components/App';
@@ -22,6 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HeroSection />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="/dashboard" element={<App2 />} />
         </Routes>
       </div>

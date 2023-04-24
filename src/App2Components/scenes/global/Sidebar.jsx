@@ -97,7 +97,7 @@ const Sidebar = () => {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={`../../../user.png`}
+                  src={".user.png"}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
@@ -121,7 +121,7 @@ const Sidebar = () => {
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               title="Dashboard"
-              to="/"
+              to="/dashboard"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -136,7 +136,7 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="View Drone"
-              to="/deviceManagement"
+              to="/dashboard/deviceManagement"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

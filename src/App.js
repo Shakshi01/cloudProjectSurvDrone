@@ -6,6 +6,7 @@ import Home from './components/pages/Home';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import LoginPage from './components/pages/LoginPage';
+import LoginPage2 from './components/pages/LoginPage2';
 import RegisterPage from './components/pages/RegisterPage';
 
 

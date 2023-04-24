@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './LoginPage.css';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -9,7 +12,17 @@ const LoginPage = () => {
     e.preventDefault();
     console.log(`Email: ${email}, Password: ${password}`);
     // Perform authentication here, and handle routing upon successful authentication.
+    sendRequest().then(()=>navigate("/dashboard"));
   };
+
+  const sendRequest=async()=>{
+      const res=await axios.post('http://localhost:5001/api/login',{
+          email:email,
+          password:password,
+      },{withCredentials: true}).catch(err=>console.log(err))
+      const data=await res.data;
+      return data;
+  }
 
   return (
     <div className="login-container">

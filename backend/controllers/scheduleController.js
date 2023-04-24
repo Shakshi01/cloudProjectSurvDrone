@@ -65,7 +65,7 @@ const verifyToken=(req,res,next)=>{
     if(!token){
         return res.status(400).json({message:'Token not found'})
     }
-    jwt.verify(String(token),"gautam",(err,user)=>{
+    jwt.verify(String(token),"shakshi",(err,user)=>{
         if(err){
             return res.status(400).json({message:"Invalid token"})
         }

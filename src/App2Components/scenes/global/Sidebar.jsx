@@ -129,21 +129,21 @@ const Sidebar = () => {
           
           <Typography
               variant="h6"
-              color={colors.grey[300]}
+              color={colors.greenAccent[500]}
               sx={{ m: "15px 0 5px 20px" }}
             >
               Device Management
             </Typography>
             <Item
               title="View Drone"
-              to="/dashboard/deviceManagement"
+              to="/viewDrone"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Create Drone"
-              to="/form"
+              to="/createDrone"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -169,6 +169,14 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+
+            <Typography
+              variant="h6"
+              color={colors.greenAccent[500]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              Mission Planner
+            </Typography>
             <Item
               title="Mission Planner"
               to="/missionPlanner"
@@ -179,7 +187,7 @@ const Sidebar = () => {
 
             <Typography
               variant="h6"
-              color={colors.grey[300]}
+              color={colors.greenAccent[500]}
               sx={{ m: "15px 0 5px 20px" }}
             >
               Pages
@@ -208,7 +216,7 @@ const Sidebar = () => {
 
             <Typography
               variant="h6"
-              color={colors.grey[300]}
+              color={colors.greenAccent[500]}
               sx={{ m: "15px 0 5px 20px" }}
             >
               Charts

@@ -157,7 +157,7 @@ const Sidebar = () => {
             />
             <Item
               title="Create Schedular"
-              to="/viewSchedular"
+              to="/createSchedular"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

@@ -12,6 +12,21 @@ import LoginPage from './components/pages/LoginPage';
 import RegisterPage from './components/pages/RegisterPage';
 import App2 from './App2Components/App';
 
+import Topbar from "./App2Components/scenes/global/Topbar";
+import Sidebar from "./App2Components/scenes/global/Sidebar";
+import Dashboard from "./App2Components/scenes/dashboard";
+import Team from "./App2Components/scenes/team";
+import Invoices from "./App2Components/scenes/invoices";
+import Contacts from "./App2Components/scenes/contacts";
+import Bar from "./App2Components/scenes/bar";
+import Form from "./App2Components/scenes/form";
+import Line from "./App2Components/scenes/line";
+import Pie from "./App2Components/scenes/pie";
+import FAQ from "./App2Components/scenes/faq";
+import Geography from "./App2Components/scenes/geography";
+import CreateSchedule from "./App2Components/scenes/CreateSchedule"
+import ViewScheules from "./App2Components/scenes/ViewScheules"
+
 
 function AppContent() {
   const location = useLocation();
@@ -29,6 +44,15 @@ function AppContent() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/dashboard" element={<App2 />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/deviceManagement" element={<Team />} />
+        <Route path="/form" element={<Form />} />
+        <Route path="/viewSchedular" element={<ViewScheules />} />
+        <Route path="/createSchedular" element={<CreateSchedule />} />
+        <Route path="/bar" element={<Bar />} />
+        <Route path="/pie" element={<Pie />} />
+        <Route path="/line" element={<Line />} />
+        <Route path="/faq" element={<FAQ />} />
       </Routes>
     </div>
   );

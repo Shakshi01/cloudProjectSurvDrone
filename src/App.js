@@ -11,7 +11,7 @@ import HeroSection from './components/HeroSection';
 import LoginPage from './components/pages/LoginPage';
 import RegisterPage from './components/pages/RegisterPage';
 import {ViewDashboard,ViewDronePage,ViewSchedulePage,CreateDronePage,CreateSchedulePage} from './App2Components/App';
-import {ViewBar,ViewPie,ViewLine,ViewFaq,ViewGeography} from './App2Components/App';
+import {ViewBar,ViewPie,ViewLine,ViewFaq,ViewGeography,ViewContacts,ViewCalendar} from './App2Components/App';
 
 import Topbar from "./App2Components/scenes/global/Topbar";
 import Sidebar from "./App2Components/scenes/global/Sidebar";
@@ -56,6 +56,8 @@ function AppContent() {
         <Route path="/dashboard/line" element={<ViewLine />} />
         <Route path="/dashboard/faq" element={<ViewFaq />} />
         <Route path="/dashboard/geography" element={<ViewGeography />} />
+        <Route path="/dashboard/contacts" element={<ViewContacts />} />
+        <Route path="dashboard/calendar" element={<ViewCalendar />} />
       </Routes>
     </div>
   );

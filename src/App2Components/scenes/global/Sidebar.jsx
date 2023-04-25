@@ -165,7 +165,7 @@ const Sidebar = () => {
             />
             <Item
               title="Contacts Information"
-              to="/contacts"
+              to="/dashboard/contacts"
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -180,7 +180,7 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="Mission Planner"
-              to="/missionPlanner"
+              to="/dashboard/missionPlanner"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -195,21 +195,21 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="Profile Form"
-              to="/form"
+              to="/dashboard/form"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Calendar"
-              to="/calendar"
+              to="/dashboard/calendar"
               icon={<CalendarTodayOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Invoices"
-              to="/invoices"
+              to="/dashboard/invoices"
               icon={<HelpOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

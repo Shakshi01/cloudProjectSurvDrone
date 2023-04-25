@@ -57,20 +57,23 @@ const ViewDrone=async(req,res,next)=>{
 
   const deleteDrone = async (req, res, next) => {
     const { id } = req.params;
-  
+    console.log(id);
     try {
-      const deletedDrone = await Drone.findByIdAndDelete(id);
-  
-      if (!deletedDrone) {
-        return res.status(404).json({ message: "Drone not found" });
+      const drone = await Drone.findOneAndDelete({ drone_id: id });
+      if (!drone) {
+        console.log("Drone not found");
+        res.status(404).json({ message: "Drone not found" });
+      } else {
+        console.log("Drone deleted successfully");
+        res.status(200).json({ message: "Drone deleted successfully" });
       }
-  
-      res.status(200).json({ message: "Drone deleted successfully", drone: deletedDrone });
     } catch (error) {
       console.error("Error deleting drone:", error);
       res.status(500).json({ message: "Error deleting drone" });
     }
   };
+  
+  
   
   
 const verifyToken=(req,res,next)=>{

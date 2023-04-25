@@ -6,7 +6,7 @@ import Header from "../../components/Header";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const createDrone = () => {
+const CreateDrone = () => {
   const navigate = useNavigate();
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
@@ -22,6 +22,7 @@ const createDrone = () => {
         manufacturer:values.Manufacturer,
         model_number:values.ModelNumber,
         price:values.Price,
+        schedule_id:values.ScheduleId,
       },{withCredentials: true}).catch(err=>console.log(err))
       const data=await res.data;
       return data;
@@ -118,6 +119,19 @@ const createDrone = () => {
                 helperText={touched.Price && errors.Price}
                 sx={{ gridColumn: "span 4" }}
               />
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Schedule ID"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.ScheduleId}
+                name="DroneId"
+                error={!!touched.ScheduleId && !!errors.ScheduleId}
+                helperText={touched.ScheduleId && errors.ScheduleId}
+                sx={{ gridColumn: "span 4" }}
+              />
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
@@ -137,6 +151,7 @@ const checkoutSchema = yup.object().shape({
   Manufacturer: yup.string().required("required"),
   ModelNumber: yup.string().required("required"),
   Price: yup.string().required("required"),
+  ScheduleId: yup.string().required("required"),
 });
 const initialValues = {
   DroneId: "",
@@ -144,6 +159,7 @@ const initialValues = {
   Manufacturer: "",
   ModelNumber: "",
   Price: "",
+  ScheduleId: "",
 };
 
-export default createDrone;
+export default CreateDrone;

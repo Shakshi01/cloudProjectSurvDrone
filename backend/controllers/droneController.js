@@ -5,8 +5,8 @@ const { Drone1 } = require('@mui/icons-material');
   
 
 const createDrone=async(req,res,next)=>{
-    const {drone_id,name,manufacturer,model_number,price}=req.body;
-    console.log(drone_id,name,manufacturer,model_number,price);
+    const {drone_id,name,manufacturer,model_number,price,schedule_id}=req.body;
+    console.log(drone_id,name,manufacturer,model_number,price,schedule_id);
     let existingDrone;
     try{
         existingDrone=await Drone.findOne({drone_id:drone_id});
@@ -24,6 +24,7 @@ const createDrone=async(req,res,next)=>{
         manufacturer,
         model_number,
         price,
+        schedule_id,
     });
     console.log("Adding Drone");
 

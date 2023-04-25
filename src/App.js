@@ -26,6 +26,8 @@ import FAQ from "./App2Components/scenes/faq";
 import Geography from "./App2Components/scenes/geography";
 import CreateSchedule from "./App2Components/scenes/CreateSchedule"
 import ViewScheules from "./App2Components/scenes/ViewScheules"
+import CreateDrone from './App2Components/scenes/createDrone';
+import ViewDrone from './App2Components/scenes/viewDrone';
 
 
 function AppContent() {
@@ -49,6 +51,8 @@ function AppContent() {
         <Route path="/form" element={<Form />} />
         <Route path="/viewSchedular" element={<ViewScheules />} />
         <Route path="/createSchedular" element={<CreateSchedule />} />
+        <Route path="/viewDrone" element={<ViewDrone />} />
+        <Route path="/createDrone" element={<CreateDrone />} />
         <Route path="/bar" element={<Bar />} />
         <Route path="/pie" element={<Pie />} />
         <Route path="/line" element={<Line />} />

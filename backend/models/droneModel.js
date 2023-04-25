@@ -7,6 +7,7 @@ const droneModel=mongoose.Schema(
         name:{type:String, required:true},
         model_number:{type:String, required:true},
         price:{type:String,required:true},
+        schedule_id:{type:String}
     },
 );
 

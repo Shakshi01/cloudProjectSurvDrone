@@ -71,6 +71,11 @@ const ViewDrone = () => {
       headerName: "Price",
       flex: 1,
     },
+    {
+      field: "schedule",
+      headerName: "ScheduleId",
+      flex: 1,
+    },
   ];
 
   return (

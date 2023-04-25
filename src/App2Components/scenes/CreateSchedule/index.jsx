@@ -20,7 +20,7 @@ const CreateSchedule = () => {
         schedule_id:values.ScheduledId,
         start_time:values.StartTime,
         end_time:values.EndTime,
-        path_id:values.PathId,
+        mission_id:values.MissionId,
         location:values.Location,
       },{withCredentials: true}).catch(err=>console.log(err))
       const data=await res.data;
@@ -96,13 +96,13 @@ const CreateSchedule = () => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Path ID"
+                label="Mission ID"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.PathId}
-                name="PathId"
-                error={!!touched.PathId && !!errors.PathId}
-                helperText={touched.PathId && errors.PathId}
+                value={values.MissionId}
+                name="MissionId"
+                error={!!touched.MissionId && !!errors.MissionId}
+                helperText={touched.MissionId && errors.MissionId}
                 sx={{ gridColumn: "span 4" }}
               />
               <TextField
@@ -135,14 +135,14 @@ const checkoutSchema = yup.object().shape({
   ScheduledId: yup.string().required("required"),
   StartTime: yup.string().required("required"),
   EndTime: yup.string().required("required"),
-  PathId: yup.string().required("required"),
+  MissionId: yup.string().required("required"),
   Location: yup.string().required("required"),
 });
 const initialValues = {
   ScheduledId: "",
   StartTime: "",
   EndTime: "",
-  PathId: "",
+  MissionId: "",
   Location: "",
 };
 

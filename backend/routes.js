@@ -14,6 +14,6 @@ router.post('/login',userFunctions.login);
 router.post('/addschedule',scheduleFunctions.CreateSchedule);
 router.get('/viewschedule',scheduleFunctions.ViewSchedule);
 router.post('/adddrone',droneFunctions.createDrone);
-router.get('/viewdrone',droneFunctions.viewSdrone);
+router.get('/viewdrone',droneFunctions.ViewDrone);
 router.get('/user',userFunctions.verifyToken,userFunctions.getUser);
 module.exports=router;

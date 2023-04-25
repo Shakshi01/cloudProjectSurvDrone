@@ -5,8 +5,8 @@ const { Schedule1 } = require('@mui/icons-material');
   
 
 const CreateSchedule=async(req,res,next)=>{
-    const {schedule_id,start_time,end_time,path_id,location}=req.body;
-    console.log(schedule_id,start_time,end_time,path_id,location);
+    const {schedule_id,start_time,end_time,mission_id,location}=req.body;
+    console.log(schedule_id,start_time,end_time,mission_id,location);
     let existingSchedule;
     try{
         existingSchedule=await Schedule.findOne({schedule_id:schedule_id});
@@ -22,7 +22,7 @@ const CreateSchedule=async(req,res,next)=>{
         schedule_id,
         start_time,
         end_time,
-        path_id,
+        mission_id,
         location,
     });
     console.log("Adding Schedule");

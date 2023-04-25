@@ -15,12 +15,16 @@ import Line from "./scenes/line";
 import Pie from "./scenes/pie";
 import FAQ from "./scenes/faq";
 import Geography from "./scenes/geography";
+import ViewDrone from "./scenes/viewDrone";
+import CreateDrone from "./scenes/createDrone";
+import ViewSchedule from "./scenes/ViewScheules";
+import CreateSchedule from "./scenes/CreateSchedule";
 // import Calendar from "./scenes/calendar/calendar";
 
 import './App.css';
 
 
-function App2() {
+export function ViewDashboard() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
 
@@ -36,15 +40,6 @@ function App2() {
               <main className="content">
                 <Routes>
                   <Route path="/" element={<Dashboard />} />
-                  <Route path="/dashboard/deviceManagement" element={<Team />} />
-                  <Route path="/contacts" element={<Contacts />} />
-                  <Route path="/invoices" element={<Invoices />} />
-                  <Route path="/form" element={<Form />} />
-                  <Route path="/bar" element={<Bar />} />
-                  <Route path="/pie" element={<Pie />} />
-                  <Route path="/line" element={<Line />} />
-                  <Route path="/faq" element={<FAQ />} />
-                  <Route path="/geography" element={<Geography />} />
                 </Routes>
               </main>
             </div>
@@ -55,4 +50,106 @@ function App2() {
   );
 }
 
-export default App2;
+export function ViewDronePage() {
+  const [theme, colorMode] = useMode();
+  const [isSidebar, setIsSidebar] = useState(true);
+
+  return (
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="app3">
+          <div className="main-container">
+            <Topbar setIsSidebar={setIsSidebar} />
+            <div className="content-container">
+              <Sidebar isSidebar={isSidebar} />
+              <main className="content">
+                <Routes>
+                  <Route path="/" element={<ViewDrone />} />
+                </Routes>
+              </main>
+            </div>
+          </div>
+        </div>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
+}
+
+export function CreateDronePage() {
+  const [theme, colorMode] = useMode();
+  const [isSidebar, setIsSidebar] = useState(true);
+  
+  return (
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="app3">
+          <div className="main-container">
+            <Topbar setIsSidebar={setIsSidebar} />
+            <div className="content-container">
+              <Sidebar isSidebar={isSidebar} />
+              <main className="content">
+                <Routes>
+                  <Route path="/" element={<CreateDrone />} />
+                </Routes>
+              </main>
+            </div>
+          </div>
+        </div>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
+}
+
+export function ViewSchedulePage() {
+  const [theme, colorMode] = useMode();
+  const [isSidebar, setIsSidebar] = useState(true);
+
+  return (
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="app3">
+          <div className="main-container">
+            <Topbar setIsSidebar={setIsSidebar} />
+            <div className="content-container">
+              <Sidebar isSidebar={isSidebar} />
+              <main className="content">
+                <Routes>
+                  <Route path="/" element={<ViewSchedule />} />
+                </Routes>
+              </main>
+            </div>
+          </div>
+        </div>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
+}
+
+export function CreateSchedulePage() {
+  const [theme, colorMode] = useMode();
+  const [isSidebar, setIsSidebar] = useState(true);
+  
+  return (
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="app3">
+          <div className="main-container">
+            <Topbar setIsSidebar={setIsSidebar} />
+            <div className="content-container">
+              <Sidebar isSidebar={isSidebar} />
+              <main className="content">
+                <Routes>
+                  <Route path="/" element={<CreateSchedule />} />
+                </Routes>
+              </main>
+            </div>
+          </div>
+        </div>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
+}

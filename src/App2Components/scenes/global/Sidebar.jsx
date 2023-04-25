@@ -137,28 +137,28 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="View Drone"
-              to="/viewDrone"
+              to="/dashboard/viewDrone"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Create Drone"
-              to="/createDrone"
+              to="/dashboard/createDrone"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="View Schedular"
-              to="/viewSchedular"
+              to="/dashboard/viewSchedular"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Create Schedular"
-              to="/createSchedular"
+              to="/dashboard/createSchedular"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

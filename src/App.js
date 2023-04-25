@@ -10,7 +10,8 @@ import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import LoginPage from './components/pages/LoginPage';
 import RegisterPage from './components/pages/RegisterPage';
-import App2 from './App2Components/App';
+import {ViewDashboard,ViewDronePage,ViewSchedulePage,CreateDronePage,CreateSchedulePage} from './App2Components/App';
+//import App3 from './App2Components/App';
 
 import Topbar from "./App2Components/scenes/global/Topbar";
 import Sidebar from "./App2Components/scenes/global/Sidebar";
@@ -45,18 +46,16 @@ function AppContent() {
         <Route path="/" element={<HeroSection />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/dashboard" element={<App2 />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/dashboard/deviceManagement" element={<Team />} />
-        <Route path="/form" element={<Form />} />
-        <Route path="/viewSchedular" element={<ViewScheules />} />
-        <Route path="/createSchedular" element={<CreateSchedule />} />
-        <Route path="/viewDrone" element={<ViewDrone />} />
-        <Route path="/createDrone" element={<CreateDrone />} />
+        <Route path="/dashboard" element={<ViewDashboard />} />
+        <Route path="/dashboard/viewSchedular" element={<ViewSchedulePage />} />
+        <Route path="/dashboard/createSchedular" element={<CreateSchedulePage />} />
+        <Route path="/dashboard/viewDrone" element={<ViewDronePage />} />
+        <Route path="/dashboard/createDrone" element={<CreateDronePage />} />
         <Route path="/bar" element={<Bar />} />
         <Route path="/pie" element={<Pie />} />
         <Route path="/line" element={<Line />} />
         <Route path="/faq" element={<FAQ />} />
+        <Route path="/geography" element={<Geography />} />
       </Routes>
     </div>
   );

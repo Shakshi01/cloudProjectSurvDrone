@@ -72,7 +72,7 @@ const ViewDrone = () => {
       flex: 1,
     },
     {
-      field: "schedule",
+      field: "schedule_id",
       headerName: "ScheduleId",
       flex: 1,
     },

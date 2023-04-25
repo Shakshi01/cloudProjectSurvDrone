@@ -4,36 +4,52 @@ import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-const CreateDrone = () => {
+
+const EditDrone = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const location = useLocation();
+  const drone_info = location.state.drone_info;
+  const initialValues = {
+    DroneId: drone_info.drone_id, // Replace with the fetched drone data
+    Name: drone_info.name,
+    Manufacturer: drone_info.manufacturer,
+    ModelNumber: drone_info.model_number,
+    Price: drone_info.price,
+  };
+
+  // Fetch the drone data with the given id
+  // ...
 
   const handleFormSubmit = (values) => {
     console.log(values);
-    sendRequest(values).then(()=>navigate("/dashboard/viewDrone"));
+    updateRequest(values).then(() => navigate("/dashboard/viewDrone"));
   };
 
-  const sendRequest=async(values)=>{
-      const res=await axios.post('http://localhost:5001/api/adddrone',{
-        drone_id:values.DroneId,
-        name:values.Name,
-        manufacturer:values.Manufacturer,
-        model_number:values.ModelNumber,
-        price:values.Price,
-      },{withCredentials: true}).catch(err=>console.log(err))
-      const data=await res.data;
-      return data;
+  const updateRequest = async (values) => {
+    const res = await axios.put(`http://localhost:5001/api/drones/${values.DroneId}`, {
+      drone_id: values.DroneId,
+      name: values.Name,
+      manufacturer: values.Manufacturer,
+      model_number: values.ModelNumber,
+      price: values.Price,
+      schedule_id: values.ScheduleId,
+    }, { withCredentials: true }).catch(err => console.log(err))
+    const data = await res.data;
+    return data;
   }
 
   return (
     <Box m="20px">
-      <Header title="Add New Drone" />
+      <Header title="Edit Drone" />
 
       <Formik
         onSubmit={handleFormSubmit}
-        initialValues={initialValues}
+        initialValues={initialValues} // Replace with the fetched drone data
         validationSchema={checkoutSchema}
       >
         {({
@@ -53,7 +69,7 @@ const CreateDrone = () => {
                 "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
               }}
             >
-              <TextField
+            <TextField
                 fullWidth
                 variant="filled"
                 type="text"
@@ -65,6 +81,7 @@ const CreateDrone = () => {
                 error={!!touched.DroneId && !!errors.DroneId}
                 helperText={touched.DroneId && errors.DroneId}
                 sx={{ gridColumn: "span 4" }}
+                InputProps={{ readOnly: true }}
               />
               <TextField
                 fullWidth
@@ -121,7 +138,7 @@ const CreateDrone = () => {
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
-                Add New Drone
+                Update Drone
               </Button>
             </Box>
           </form>
@@ -138,12 +155,7 @@ const checkoutSchema = yup.object().shape({
   ModelNumber: yup.string().required("required"),
   Price: yup.string().required("required"),
 });
-const initialValues = {
-  DroneId: "",
-  Name: "",
-  Manufacturer: "",
-  ModelNumber: "",
-  Price: "",
-};
 
-export default CreateDrone;
+
+
+export default EditDrone;

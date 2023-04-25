@@ -16,6 +16,7 @@ router.post('/addschedule',scheduleFunctions.CreateSchedule);
 router.get('/viewschedule',scheduleFunctions.ViewSchedule);
 router.post('/adddrone',droneFunctions.createDrone);
 router.delete("/drones/:id", droneFunctions.deleteDrone);
+router.put("/drones/:id", droneFunctions.editDrone);
 router.get('/viewdrone',droneFunctions.ViewDrone);
 router.get('/missionOptions',missionFunctions.ViewMissionIdList);
 router.get('/user',userFunctions.verifyToken,userFunctions.getUser);

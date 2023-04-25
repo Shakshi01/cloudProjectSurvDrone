@@ -4,8 +4,8 @@ const jwt=require('jsonwebtoken');
   
 
 const createDrone=async(req,res,next)=>{
-    const {drone_id,name,manufacturer,model_number,price,schedule_id}=req.body;
-    console.log(drone_id,name,manufacturer,model_number,price,schedule_id);
+    const {drone_id,name,manufacturer,model_number,price}=req.body;
+    console.log(drone_id,name,manufacturer,model_number,price);
     let existingDrone;
     try{
         existingDrone=await Drone.findOne({drone_id:drone_id});
@@ -23,7 +23,6 @@ const createDrone=async(req,res,next)=>{
         manufacturer,
         model_number,
         price,
-        schedule_id,
     });
     console.log("Adding Drone");
 
@@ -73,6 +72,30 @@ const ViewDrone=async(req,res,next)=>{
     }
   };
   
+  const editDrone = async (req, res, next) => {
+    const { id } = req.params;
+    const { drone_id, name, manufacturer, model_number, price, schedule_id } = req.body;
+  
+    try {
+      const drone = await Drone.findOne({ drone_id: id });
+      if (!drone) {
+        res.status(404).json({ message: "Drone not found" });
+      } else {
+        drone.drone_id = drone_id || drone.drone_id;
+        drone.name = name || drone.name;
+        drone.manufacturer = manufacturer || drone.manufacturer;
+        drone.model_number = model_number || drone.model_number;
+        drone.price = price || drone.price;
+        drone.schedule_id = schedule_id || drone.schedule_id;
+  
+        await drone.save();
+        res.status(200).json({ message: "Drone updated successfully", drone });
+      }
+    } catch (error) {
+      console.error("Error editing drone:", error);
+      res.status(500).json({ message: "Error editing drone" });
+    }
+  };
   
   
   
@@ -110,4 +133,4 @@ const getDrone=async(req,res,next)=>{
     return res.status(200).json({drone});
 }
 
-module.exports={createDrone,ViewDrone,deleteDrone,verifyToken,getDrone};
+module.exports={createDrone,ViewDrone,deleteDrone,editDrone,verifyToken,getDrone};

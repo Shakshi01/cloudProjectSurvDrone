@@ -17,6 +17,7 @@ import FAQ from "./scenes/faq";
 import Geography from "./scenes/geography";
 import ViewDrone from "./scenes/viewDrone";
 import CreateDrone from "./scenes/createDrone";
+import EditDrone from "./scenes/EditDrone";
 import ViewSchedule from "./scenes/ViewScheules";
 import CreateSchedule from "./scenes/CreateSchedule";
 import Calendar from "./scenes/calendar";
@@ -75,6 +76,33 @@ export function ViewDronePage() {
     </ColorModeContext.Provider>
   );
 }
+
+export function EditDronePage() {
+  const [theme, colorMode] = useMode();
+  const [isSidebar, setIsSidebar] = useState(true);
+
+  return (
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="app3">
+          <div className="main-container">
+            <Topbar setIsSidebar={setIsSidebar} />
+            <div className="content-container">
+              <Sidebar isSidebar={isSidebar} />
+              <main className="content">
+                <Routes>
+                  <Route path="/" element={<EditDrone />} />
+                </Routes>
+              </main>
+            </div>
+          </div>
+        </div>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
+}
+
 
 export function CreateDronePage() {
   const [theme, colorMode] = useMode();

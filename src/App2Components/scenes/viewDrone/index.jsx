@@ -62,10 +62,11 @@ const ViewDrone = () => {
   };
 
   
-  const handleEdit = (id) => {
-    console.log("Edit clicked for drone_id:", id);
-    // Add your edit logic here, e.g., navigate to the edit page
+  const handleEdit = (row) => {
+    console.log("Edit clicked for drone_id:", row.drone_id);
+    navigate('/dashboard/editDrone', { state: { drone_info: row } });
   };
+  
   
   const handleDelete = async (id) => {
     console.log("Delete clicked for drone_id:", id);
@@ -80,9 +81,7 @@ const ViewDrone = () => {
       const formattedData = data.map((item) => {
         const { _id, __v, ...rest } = item;
         return {
-          ...rest,
-          name: new Date(item.name).toLocaleString(),
-          manufacturer: new Date(item.manufacturer).toLocaleString(),
+          ...rest
         };
       });
       setDocs(formattedData);
@@ -116,11 +115,6 @@ const ViewDrone = () => {
       flex: 1,
     },
     {
-      field: "schedule_id",
-      headerName: "ScheduleId",
-      flex: 1,
-    },
-    {
       field: "actions",
       headerName: "Actions",
       flex: 1,
@@ -130,7 +124,7 @@ const ViewDrone = () => {
         <Box>
           <IconButton
             color="primary"
-            onClick={() => handleEdit(params.row.drone_id)}
+            onClick={() => handleEdit(params.row)}
           >
             <EditIcon />
           </IconButton>

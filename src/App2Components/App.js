@@ -18,6 +18,7 @@ import Geography from "./scenes/geography";
 import ViewDrone from "./scenes/viewDrone";
 import CreateDrone from "./scenes/createDrone";
 import EditDrone from "./scenes/EditDrone";
+import EditSchedule from "./scenes/EditSchedule";
 import ViewSchedule from "./scenes/ViewScheules";
 import CreateSchedule from "./scenes/CreateSchedule";
 import Calendar from "./scenes/calendar";
@@ -172,6 +173,32 @@ export function CreateSchedulePage() {
               <main className="content">
                 <Routes>
                   <Route path="/" element={<CreateSchedule />} />
+                </Routes>
+              </main>
+            </div>
+          </div>
+        </div>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
+}
+
+export function EditSchedulePage() {
+  const [theme, colorMode] = useMode();
+  const [isSidebar, setIsSidebar] = useState(true);
+
+  return (
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="app3">
+          <div className="main-container">
+            <Topbar setIsSidebar={setIsSidebar} />
+            <div className="content-container">
+              <Sidebar isSidebar={isSidebar} />
+              <main className="content">
+                <Routes>
+                  <Route path="/" element={<EditSchedule />} />
                 </Routes>
               </main>
             </div>

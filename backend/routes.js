@@ -14,6 +14,8 @@ router.post('/signup',userFunctions.signup);
 router.post('/login',userFunctions.login);
 router.post('/addschedule',scheduleFunctions.CreateSchedule);
 router.get('/viewschedule',scheduleFunctions.ViewSchedule);
+router.delete("/schedules/:id", scheduleFunctions.deleteSchedule);
+router.put("/schedules/:id", scheduleFunctions.editSchedule);
 router.post('/adddrone',droneFunctions.createDrone);
 router.delete("/drones/:id", droneFunctions.deleteDrone);
 router.put("/drones/:id", droneFunctions.editDrone);

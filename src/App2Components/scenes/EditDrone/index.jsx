@@ -37,7 +37,6 @@ const EditDrone = () => {
       manufacturer: values.Manufacturer,
       model_number: values.ModelNumber,
       price: values.Price,
-      schedule_id: values.ScheduleId,
     }, { withCredentials: true }).catch(err => console.log(err))
     const data = await res.data;
     return data;

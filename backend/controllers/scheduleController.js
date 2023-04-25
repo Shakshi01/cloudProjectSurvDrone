@@ -54,6 +54,48 @@ const ViewSchedule=async(req,res,next)=>{
       res.status(500).json({ message: "Error retrieving schedules." });
     }
   }
+
+  const deleteSchedule = async (req, res, next) => {
+    const { id } = req.params;
+    console.log(id);
+    try {
+      const schedule = await Schedule.findOneAndDelete({ schedule_id: id });
+      if (!schedule) {
+        console.log("Schedule not found");
+        res.status(404).json({ message: "Schedule not found" });
+      } else {
+        console.log("Schedule deleted successfully");
+        res.status(200).json({ message: "Schedule deleted successfully" });
+      }
+    } catch (error) {
+      console.error("Error deleting Schedule:", error);
+      res.status(500).json({ message: "Error deleting Schedule" });
+    }
+  };
+  
+  const editSchedule = async (req, res, next) => {
+    const { id } = req.params;
+    const { schedule_id,start_time,end_time,mission_id,location } = req.body;
+  
+    try {
+      const schedule = await Schedule.findOne({ schedule_id: id });
+      if (!schedule) {
+        res.status(404).json({ message: "Schedule not found" });
+      } else {
+        schedule.schedule_id = schedule_id || schedule.schedule_id;
+        schedule.start_time = start_time || schedule.start_time;
+        schedule.end_time = end_time || schedule.end_time;
+        schedule.mission_id = mission_id || schedule.mission_id;
+        schedule.location = location || schedule.location;
+  
+        await schedule.save();
+        res.status(200).json({ message: "Schedule updated successfully", schedule });
+      }
+    } catch (error) {
+      console.error("Error editing Schedule:", error);
+      res.status(500).json({ message: "Error editing Schedule" });
+    }
+  };
   
 const verifyToken=(req,res,next)=>{
     const cookies=req.headers.cookie;
@@ -89,4 +131,4 @@ const getUser=async(req,res,next)=>{
     return res.status(200).json({user});
 }
 
-module.exports={CreateSchedule,ViewSchedule,verifyToken,getUser};
+module.exports={CreateSchedule,ViewSchedule,deleteSchedule, editSchedule,verifyToken,getUser};

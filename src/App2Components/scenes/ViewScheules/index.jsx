@@ -10,6 +10,9 @@ import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Button, IconButton } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 
 const ViewSchedules = () => {
@@ -25,6 +28,30 @@ const ViewSchedules = () => {
     );
     console.log('Data received from backend:', res.data);
     return res.data;
+  };
+
+  const deleteSchedule = async (id) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:5001/api/schedules/${id}`,
+        { withCredentials: true }
+      );
+      console.log("Drone deleted successfully:", response.data);
+      setDocs(docs.filter((doc) => doc.schedule_id !== id));
+    } catch (error) {
+      console.error("Error deleting schedule:", error);
+    }
+  };
+  
+  const handleEdit = (row) => {
+    console.log("Edit clicked for schedule_id:", row.schedule_id);
+    navigate('/dashboard/editSchedule', { state: { schedule_info: row } });
+  };
+  
+  
+  const handleDelete = async (id) => {
+    console.log("Delete clicked for schedule_id:", id);
+    await deleteSchedule(id);
   };
   
   useEffect(() => {
@@ -71,6 +98,29 @@ const ViewSchedules = () => {
       headerName: "Location",
       flex: 1,
     },
+    {
+      field: "actions",
+      headerName: "Actions",
+      flex: 1,
+      sortable: false,
+      filterable: false,
+      renderCell: (params) => (
+        <Box>
+          <IconButton
+            color="primary"
+            onClick={() => handleEdit(params.row)}
+          >
+            <EditIcon />
+          </IconButton>
+          <IconButton
+            color="secondary"
+            onClick={() => handleDelete(params.row.schedule_id)}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </Box>
+      ),
+    },    
   ];
 
   return (

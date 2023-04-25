@@ -10,7 +10,7 @@ import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import LoginPage from './components/pages/LoginPage';
 import RegisterPage from './components/pages/RegisterPage';
-import {ViewDashboard,ViewDronePage,ViewSchedulePage,CreateDronePage,CreateSchedulePage,EditDronePage} from './App2Components/App';
+import {ViewDashboard,ViewDronePage,ViewSchedulePage,CreateDronePage,CreateSchedulePage,EditDronePage,EditSchedulePage} from './App2Components/App';
 import {ViewBar,ViewPie,ViewLine,ViewFaq,ViewGeography,ViewContacts,ViewCalendar} from './App2Components/App';
 
 import Topbar from "./App2Components/scenes/global/Topbar";
@@ -49,6 +49,7 @@ function AppContent() {
         <Route path="/dashboard" element={<ViewDashboard />} />
         <Route path="/dashboard/viewSchedular" element={<ViewSchedulePage />} />
         <Route path="/dashboard/createSchedular" element={<CreateSchedulePage />} />
+        <Route path="/dashboard/editSchedule" element={<EditSchedulePage />} />
         <Route path="/dashboard/viewDrone" element={<ViewDronePage />} />
         <Route path="/dashboard/createDrone" element={<CreateDronePage />} />
         <Route path="/dashboard/editDrone" element={<EditDronePage />} />

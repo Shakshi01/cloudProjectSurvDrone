@@ -43,24 +43,6 @@ const ViewDrone = () => {
       console.error("Error deleting drone:", error);
     }
   };
-
-  const editDrone = async (id, updatedDroneData) => {
-    try {
-      const response = await axios.put(
-        `EDIT_DRONE_API_URL/${id}`,
-        updatedDroneData,
-        { withCredentials: true }
-      );
-      console.log("Drone updated successfully:", response.data);
-      const updatedDocs = docs.map((doc) =>
-        doc.drone_id === id ? { ...doc, ...updatedDroneData } : doc
-      );
-      setDocs(updatedDocs);
-    } catch (error) {
-      console.error("Error updating drone:", error);
-    }
-  };
-
   
   const handleEdit = (row) => {
     console.log("Edit clicked for drone_id:", row.drone_id);

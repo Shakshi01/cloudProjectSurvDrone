@@ -10,6 +10,10 @@ import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Button, IconButton } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+
 
 
 const ViewDrone = () => {
@@ -26,6 +30,33 @@ const ViewDrone = () => {
     console.log('Data received from backend:', res.data);
     return res.data;
   };
+
+  const deleteDrone = async (id) => {
+    try {
+      const response = await axios.delete(
+        "http://localhost:5001/api/deletedrone",
+        { withCredentials: true }
+      );
+      console.log("Drone deleted successfully:", response.data);
+      setDocs(docs.filter((doc) => doc.drone_id !== id));
+    } catch (error) {
+      console.error("Error deleting drone:", error);
+    }
+  };
+  
+
+  
+  const handleEdit = (id) => {
+    console.log("Edit clicked for drone_id:", id);
+    // Add your edit logic here, e.g., navigate to the edit page
+  };
+  
+  const handleDelete = async (id) => {
+    console.log("Delete clicked for drone_id:", id);
+    await deleteDrone(id);
+  };
+  
+  
   
   useEffect(() => {
     async function fetchData() {
@@ -44,9 +75,6 @@ const ViewDrone = () => {
     fetchData();
   }, []);
   
-  
-  
-
   const columns = [
     { field: "drone_id", headerName: "DroneId" },
     {
@@ -76,6 +104,29 @@ const ViewDrone = () => {
       headerName: "ScheduleId",
       flex: 1,
     },
+    {
+      field: "actions",
+      headerName: "Actions",
+      flex: 1,
+      sortable: false,
+      filterable: false,
+      renderCell: (params) => (
+        <Box>
+          <IconButton
+            color="primary"
+            onClick={() => handleEdit(params.row.drone_id)}
+          >
+            <EditIcon />
+          </IconButton>
+          <IconButton
+            color="secondary"
+            onClick={() => handleDelete(params.row.drone_id)}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </Box>
+      ),
+    },    
   ];
 
   return (

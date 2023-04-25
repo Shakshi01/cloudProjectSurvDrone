@@ -54,6 +54,24 @@ const ViewDrone=async(req,res,next)=>{
       res.status(500).json({ message: "Error retrieving Drones." });
     }
   }
+
+  const deleteDrone = async (req, res, next) => {
+    const { id } = req.params;
+  
+    try {
+      const deletedDrone = await Drone.findByIdAndDelete(id);
+  
+      if (!deletedDrone) {
+        return res.status(404).json({ message: "Drone not found" });
+      }
+  
+      res.status(200).json({ message: "Drone deleted successfully", drone: deletedDrone });
+    } catch (error) {
+      console.error("Error deleting drone:", error);
+      res.status(500).json({ message: "Error deleting drone" });
+    }
+  };
+  
   
 const verifyToken=(req,res,next)=>{
     const cookies=req.headers.cookie;
@@ -89,4 +107,4 @@ const getDrone=async(req,res,next)=>{
     return res.status(200).json({drone});
 }
 
-module.exports={createDrone,ViewDrone,verifyToken,getDrone};
+module.exports={createDrone,ViewDrone,deleteDrone,verifyToken,getDrone};

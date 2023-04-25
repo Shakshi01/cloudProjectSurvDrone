@@ -62,8 +62,8 @@ const ViewSchedules = () => {
       cellClassName: "name-column--cell",
     },
     {
-      field: "path_id",
-      headerName: "Path ID",
+      field: "mission_id",
+      headerName: "Mission ID",
       flex: 1,
     },
     {

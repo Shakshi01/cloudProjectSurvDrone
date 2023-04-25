@@ -1,33 +1,76 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField, FormControl, InputLabel, Select, MenuItem, FormHelperText, Typography } from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
 
 const CreateSchedule = () => {
   const navigate = useNavigate();
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const [missionOptions, setMissionOptions] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleFormSubmit = (values) => {
+  useEffect(() => {
+    fetchMissionOptions().then((options) => setMissionOptions(options));
+  }, []);
+
+  const fetchMissionOptions = async () => {
+    try {
+      const response = await axios.get("http://localhost:5001/api/missionOptions", {
+        withCredentials: true,
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching mission options:", error);
+      return [];
+    }
+  };
+  
+  const handleFormSubmit = async (values) => {
     console.log(values);
-    sendRequest(values).then(()=>navigate("/viewSchedular"));
+    //sendRequest(values).then(()=>navigate("/dashboard/viewSchedular"));
+    const responseData = await sendRequest(values);
+    if (responseData) {
+      navigate("/dashboard/viewSchedular");
+    }
   };
 
-  const sendRequest=async(values)=>{
-      const res=await axios.post('http://localhost:5001/api/addschedule',{
-        schedule_id:values.ScheduledId,
-        start_time:values.StartTime,
-        end_time:values.EndTime,
-        mission_id:values.MissionId,
-        location:values.Location,
-      },{withCredentials: true}).catch(err=>console.log(err))
-      const data=await res.data;
+  const sendRequest = async (values) => {
+    try {
+      const res = await axios.post(
+        "http://localhost:5001/api/addschedule",
+        {
+          schedule_id: values.ScheduledId,
+          start_time: values.StartTime,
+          end_time: values.EndTime,
+          mission_id: values.MissionId,
+          location: values.Location,
+        },
+        { withCredentials: true }
+      );
+      const data = await res.data;
+  
+      // Reset the error message
+      setErrorMessage("");
+  
       return data;
-  }
+    } catch (err) {
+      if (err.response && err.response.data.message === "ScheduleID already exists") {
+        // Set the error message
+        console.log("ScheduleID already exists");
+        setErrorMessage("ScheduleID already exists");
+      } else {
+        console.log(err);
+      }
+    }
+  };
+  
 
   return (
+    
     <Box m="20px">
       <Header title="Add New Schedule" />
 
@@ -92,19 +135,33 @@ const CreateSchedule = () => {
                 helperText={touched.EndTime && errors.EndTime}
                 sx={{ gridColumn: "span 4" }}
               />
-              <TextField
+              <FormControl
                 fullWidth
                 variant="filled"
-                type="text"
-                label="Mission ID"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.MissionId}
-                name="MissionId"
                 error={!!touched.MissionId && !!errors.MissionId}
-                helperText={touched.MissionId && errors.MissionId}
                 sx={{ gridColumn: "span 4" }}
-              />
+              >
+                <InputLabel htmlFor="MissionId">Mission ID</InputLabel>
+                <Select
+                  label="Mission ID"
+                  value={values.MissionId}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  inputProps={{
+                    name: "MissionId",
+                    id: "MissionId",
+                  }}
+                >
+                  {missionOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <FormHelperText>
+                  {touched.MissionId && errors.MissionId}
+                </FormHelperText>
+              </FormControl>
               <TextField
                 fullWidth
                 variant="filled"
@@ -124,6 +181,11 @@ const CreateSchedule = () => {
                 Add New Schedule
               </Button>
             </Box>
+            {errorMessage && (
+            <Box mt="10px">
+              <Typography color="error">{errorMessage}</Typography>
+            </Box>
+            )}
           </form>
         )}
       </Formik>

@@ -16,7 +16,7 @@ const CreateSchedule=async(req,res,next)=>{
     }
     if(existingSchedule){
         console.log("Schedule already exists");
-        return res.status(400).json({message:"Schedule already exists"});
+        return res.status(400).json({message:"ScheduleID already exists"});
     }
     const schedule= new Schedule({
         schedule_id,

@@ -12,7 +12,7 @@ const CreateDrone = () => {
 
   const handleFormSubmit = (values) => {
     console.log(values);
-    sendRequest(values).then(()=>navigate("/viewDrone"));
+    sendRequest(values).then(()=>navigate("/dashboard/viewDrone"));
   };
 
   const sendRequest=async(values)=>{

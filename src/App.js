@@ -11,7 +11,7 @@ import HeroSection from './components/HeroSection';
 import LoginPage from './components/pages/LoginPage';
 import RegisterPage from './components/pages/RegisterPage';
 import {ViewDashboard,ViewDronePage,ViewSchedulePage,CreateDronePage,CreateSchedulePage} from './App2Components/App';
-//import App3 from './App2Components/App';
+import {ViewBar,ViewPie,ViewLine,ViewFaq,ViewGeography} from './App2Components/App';
 
 import Topbar from "./App2Components/scenes/global/Topbar";
 import Sidebar from "./App2Components/scenes/global/Sidebar";
@@ -51,11 +51,11 @@ function AppContent() {
         <Route path="/dashboard/createSchedular" element={<CreateSchedulePage />} />
         <Route path="/dashboard/viewDrone" element={<ViewDronePage />} />
         <Route path="/dashboard/createDrone" element={<CreateDronePage />} />
-        <Route path="/bar" element={<Bar />} />
-        <Route path="/pie" element={<Pie />} />
-        <Route path="/line" element={<Line />} />
-        <Route path="/faq" element={<FAQ />} />
-        <Route path="/geography" element={<Geography />} />
+        <Route path="/dashboard/bar" element={<ViewBar />} />
+        <Route path="/dashboard/pie" element={<ViewPie />} />
+        <Route path="/dashboard/line" element={<ViewLine />} />
+        <Route path="/dashboard/faq" element={<ViewFaq />} />
+        <Route path="/dashboard/geography" element={<ViewGeography />} />
       </Routes>
     </div>
   );

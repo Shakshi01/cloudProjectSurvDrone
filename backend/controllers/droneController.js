@@ -1,7 +1,6 @@
 const Drone=require('../models/droneModel');
 const bcrypt=require('bcryptjs');
 const jwt=require('jsonwebtoken');
-const { Drone1 } = require('@mui/icons-material');
   
 
 const createDrone=async(req,res,next)=>{
@@ -18,7 +17,7 @@ const createDrone=async(req,res,next)=>{
         console.log("Drone already exists");
         return res.status(400).json({message:"Drone already exists"});
     }
-    const Drone= new Drone({
+    const drone= new Drone({
         drone_id,
         name,
         manufacturer,
@@ -29,7 +28,7 @@ const createDrone=async(req,res,next)=>{
     console.log("Adding Drone");
 
     try{
-        await Drone.save();
+        await drone.save();
         console.log("saved");
     }catch (err){
         console.log(err);

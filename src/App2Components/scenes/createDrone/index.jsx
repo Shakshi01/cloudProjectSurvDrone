@@ -127,7 +127,7 @@ const CreateDrone = () => {
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.ScheduleId}
-                name="DroneId"
+                name="ScheduleId"
                 error={!!touched.ScheduleId && !!errors.ScheduleId}
                 helperText={touched.ScheduleId && errors.ScheduleId}
                 sx={{ gridColumn: "span 4" }}
@@ -135,7 +135,7 @@ const CreateDrone = () => {
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
-                Add New Schedule
+                Add New Drone
               </Button>
             </Box>
           </form>

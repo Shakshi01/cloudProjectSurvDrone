@@ -118,7 +118,7 @@ const Sidebar = () => {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={prof}
+                  src="https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>

@@ -6,7 +6,7 @@ import Header from "../../components/Header";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
-import { DateTimePicker } from '@mui/x-date-pickers'; 
+import { DatePicker } from '@mui/lab';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { DesktopDateTimePicker } from '@mui/x-date-pickers';

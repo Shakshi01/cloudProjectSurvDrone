@@ -140,18 +140,18 @@ const ViewSchedules = () => {
               borderBottom: "none",
             },
             "& .name-column--cell": {
-              color: colors.greenAccent[300],
+              color: colors.greenAccent[700],
             },
             "& .MuiDataGrid-columnHeaders": {
-              backgroundColor: colors.blueAccent[700],
+              backgroundColor: colors.blueAccent[300],
               borderBottom: "none",
             },
             "& .MuiDataGrid-virtualScroller": {
-              backgroundColor: colors.primary[400],
+              backgroundColor: colors.primary[600],
             },
             "& .MuiDataGrid-footerContainer": {
               borderTop: "none",
-              backgroundColor: colors.blueAccent[700],
+              backgroundColor: colors.blueAccent[300],
             },
             "& .MuiCheckbox-root": {
               color: `${colors.greenAccent[200]} !important`,

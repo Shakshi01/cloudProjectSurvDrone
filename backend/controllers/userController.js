@@ -104,4 +104,19 @@ const getUser=async(req,res,next)=>{
     return res.status(200).json({user});
 }
 
-module.exports={signup,login,verifyToken,getUser};
+const getUserProfile=async(req,res,next)=>{
+    const userEmail=req.params.email;
+    console.log("useremail:",userEmail);
+    let user;
+    try{
+        user=await User.findOne({email: userEmail});
+    }catch(err){
+        return new Error(err);
+    }
+    if(!user){
+        return res.status(400).json({message:"User not found"})
+    }
+    return res.status(200).json({user});
+}
+
+module.exports={signup,login,verifyToken,getUser,getUserProfile};

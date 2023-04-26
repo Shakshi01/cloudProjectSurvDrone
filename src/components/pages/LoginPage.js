@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './LoginPage.css';
 import { useNavigate } from 'react-router-dom';
+import { async } from 'q';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -12,7 +13,14 @@ const LoginPage = () => {
     e.preventDefault();
     console.log(`Email: ${email}, Password: ${password}`);
     // Perform authentication here, and handle routing upon successful authentication.
-    sendRequest().then(()=>navigate("/dashboard"));
+    sendRequest().then(async()=>{
+      const res=await axios.get(
+        `http://localhost:5001/api/getuserProfile/${email}`
+      );
+      console.log("USER DETAILS:",res.data.user);
+      window.sessionStorage.setItem("userdetails",JSON.stringify(res.data.user));
+      navigate("/dashboard");
+    });
   };
 
   const sendRequest=async()=>{

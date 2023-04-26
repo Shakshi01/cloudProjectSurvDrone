@@ -22,4 +22,5 @@ router.put("/drones/:id", droneFunctions.editDrone);
 router.get('/viewdrone',droneFunctions.ViewDrone);
 router.get('/missionOptions',missionFunctions.ViewMissionIdList);
 router.get('/user',userFunctions.verifyToken,userFunctions.getUser);
+router.get('/getuserProfile/:email',userFunctions.getUserProfile);
 module.exports=router;

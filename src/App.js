@@ -46,7 +46,7 @@ function AppContent() {
         <Route path="/" element={<HeroSection />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/dashboard" element={<ViewDashboard />} />
+        <Route path="/dashboard/*" element={<ViewDashboard />} />
         <Route path="/dashboard/viewSchedular" element={<ViewSchedulePage />} />
         <Route path="/dashboard/createSchedular" element={<CreateSchedulePage />} />
         <Route path="/dashboard/editSchedule" element={<EditSchedulePage />} />

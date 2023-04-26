@@ -6,6 +6,10 @@ import Header from "../../components/Header";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
+import { DateTimePicker } from '@mui/x-date-pickers'; 
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { DesktopDateTimePicker } from '@mui/x-date-pickers';
 
 const CreateSchedule = () => {
   const navigate = useNavigate();
@@ -87,7 +91,7 @@ const CreateSchedule = () => {
   
 
   return (
-    
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
     <Box m="20px">
       <Header title="Add New Schedule" />
 
@@ -126,31 +130,27 @@ const CreateSchedule = () => {
                 helperText={touched.ScheduledId && errors.ScheduledId}
                 sx={{ gridColumn: "span 4" }}
               />
-              <TextField
+              <DesktopDateTimePicker
                 fullWidth
-                variant="filled"
-                type="text"
+                ampm={false}
+                format="yyyy/MM/dd HH:mm:ss"
                 label="Start Time"
-                onBlur={handleBlur}
-                onChange={handleChange}
                 value={values.StartTime}
-                name="StartTime"
-                error={!!touched.StartTime && !!errors.StartTime}
-                helperText={touched.StartTime && errors.StartTime}
-                sx={{ gridColumn: "span 4" }}
+                onChange={(value) => handleChange({ target: { name: "StartTime", value } })}
+                renderInput={(params) => (
+                  <TextField {...params} helperText={touched.StartTime && errors.StartTime} error={!!touched.StartTime && !!errors.StartTime} />
+                )}
               />
-              <TextField
+              <DesktopDateTimePicker
                 fullWidth
-                variant="filled"
-                type="text"
+                ampm={false}
+                format="yyyy/MM/dd HH:mm:ss"
                 label="End Time"
-                onBlur={handleBlur}
-                onChange={handleChange}
                 value={values.EndTime}
-                name="EndTime"
-                error={!!touched.EndTime && !!errors.EndTime}
-                helperText={touched.EndTime && errors.EndTime}
-                sx={{ gridColumn: "span 4" }}
+                onChange={(value) => handleChange({ target: { name: "EndTime", value } })}
+                renderInput={(params) => (
+                  <TextField {...params} helperText={touched.EndTime && errors.EndTime} error={!!touched.EndTime && !!errors.EndTime} />
+                )}
               />
               <FormControl
                 fullWidth
@@ -221,6 +221,7 @@ const CreateSchedule = () => {
         )}
       </Formik>
     </Box>
+    </LocalizationProvider>
   );
 };
 

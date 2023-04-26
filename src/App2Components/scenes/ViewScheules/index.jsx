@@ -13,6 +13,8 @@ import { useNavigate } from 'react-router-dom';
 import { Button, IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { format } from 'date-fns';
+
 
 
 const ViewSchedules = () => {
@@ -61,8 +63,8 @@ const ViewSchedules = () => {
         const { _id, __v, ...rest } = item;
         return {
           ...rest,
-          start_time: new Date(item.start_time).toLocaleString(),
-          end_time: new Date(item.end_time).toLocaleString(),
+          start_time: format(new Date(item.start_time), 'yyyy/MM/dd HH:mm:ss'),
+          end_time: format(new Date(item.end_time), 'yyyy/MM/dd HH:mm:ss'),
         };
       });
       setDocs(formattedData);

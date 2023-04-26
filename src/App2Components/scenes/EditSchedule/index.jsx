@@ -7,6 +7,10 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from "react";
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { DesktopDateTimePicker } from '@mui/x-date-pickers';
+import { parseISO, format } from 'date-fns';
 
 
 const EditSchedule = () => {
@@ -18,10 +22,11 @@ const EditSchedule = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const location = useLocation();
   const schedule_info = location.state.schedule_info;
+  
   const initialValues = {
     ScheduledId: schedule_info.schedule_id,
-    StartTime: schedule_info.start_time,
-    EndTime: schedule_info.end_time,
+    StartTime: new Date(schedule_info.start_time),
+    EndTime: new Date(schedule_info.end_time),
     MissionId: schedule_info.mission_id,
     DroneId: schedule_info.drone_id,
   };
@@ -80,6 +85,7 @@ const EditSchedule = () => {
   }
 
   return (
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
     <Box m="20px">
       <Header title="Edit Drone" />
 
@@ -119,32 +125,29 @@ const EditSchedule = () => {
                 sx={{ gridColumn: "span 4" }}
                 InputProps={{ readOnly: true }}
               />
-              <TextField
+              <DesktopDateTimePicker
                 fullWidth
-                variant="filled"
-                type="text"
+                ampm={false}
+                format="yyyy/MM/dd HH:mm:ss"
                 label="Start Time"
-                onBlur={handleBlur}
-                onChange={handleChange}
                 value={values.StartTime}
-                name="StartTime"
-                error={!!touched.StartTime && !!errors.StartTime}
-                helperText={touched.StartTime && errors.StartTime}
-                sx={{ gridColumn: "span 4" }}
+                onChange={(value) => handleChange({ target: { name: "StartTime", value } })}
+                renderInput={(params) => (
+                  <TextField {...params} helperText={touched.StartTime && errors.StartTime} error={!!touched.StartTime && !!errors.StartTime} />
+                )}
               />
-              <TextField
+              <DesktopDateTimePicker
                 fullWidth
-                variant="filled"
-                type="text"
+                ampm={false}
+                format="yyyy/MM/dd HH:mm:ss"
                 label="End Time"
-                onBlur={handleBlur}
-                onChange={handleChange}
                 value={values.EndTime}
-                name="EndTime"
-                error={!!touched.EndTime && !!errors.EndTime}
-                helperText={touched.EndTime && errors.EndTime}
-                sx={{ gridColumn: "span 4" }}
+                onChange={(value) => handleChange({ target: { name: "EndTime", value } })}
+                renderInput={(params) => (
+                  <TextField {...params} helperText={touched.EndTime && errors.EndTime} error={!!touched.EndTime && !!errors.EndTime} />
+                )}
               />
+
               <FormControl
                 fullWidth
                 variant="filled"
@@ -209,6 +212,7 @@ const EditSchedule = () => {
         )}
       </Formik>
     </Box>
+    </LocalizationProvider>
   );
 };
 

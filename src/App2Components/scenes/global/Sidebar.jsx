@@ -1,7 +1,10 @@
 import { useState } from "react";
+import * as React from 'react';
 import "react-pro-sidebar/dist/css/styles.css";
 import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import {Link as Url} from "@mui/material";
+import Modal from '@mui/material/Modal';
 import { Link } from "react-router-dom";
 import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -44,6 +47,22 @@ const Sidebar = () => {
   const [selected, setSelected] = useState("Dashboard");
   let userdetails=JSON.parse(window.sessionStorage.getItem("userdetails"));
 
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+
   return (
     <Box
       sx={{
@@ -83,7 +102,7 @@ const Sidebar = () => {
                 ml="15px"
               >
                 <Typography variant="h3" color={colors.grey[500]}>
-                  ADMIN
+                  {userdetails.role}
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -112,9 +131,47 @@ const Sidebar = () => {
                 >
                   {userdetails?.firstname}
                 </Typography>
+                <Url underline="none" onClick={handleOpen}>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                  Admin info
+                  Profile info
                 </Typography>
+                </Url>
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box sx={style}>
+                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                      Profile Details
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                      First name :  {userdetails.firstname ? userdetails.firstname:"NA"}
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                      Last name :  {userdetails.lastname ? userdetails.lastname:"NA"}
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                      Email :  {userdetails.email ? userdetails.email:"NA"}
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                      Role :  {userdetails.role ? userdetails.role:"NA"}
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                      Contact :  {userdetails.contact ? userdetails.contact:"NA"}
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                      Location :  {userdetails.location ? userdetails.location:"NA"}
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                      Gender :  {userdetails.gender ? userdetails.gender:"NA"}
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                      Age :  {userdetails.age ? userdetails.age:"NA"}
+                    </Typography>
+                  </Box>
+                </Modal>
               </Box>
             </Box>
           )}

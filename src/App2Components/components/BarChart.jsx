@@ -15,31 +15,31 @@ const BarChart = ({ isDashboard = false }) => {
         axis: {
           domain: {
             line: {
-              stroke: colors.grey[100],
+              stroke: colors.grey[800],
             },
           },
           legend: {
             text: {
-              fill: colors.grey[100],
+              fill: colors.grey[800],
             },
           },
           ticks: {
             line: {
-              stroke: colors.grey[100],
+              stroke: colors.grey[800],
               strokeWidth: 1,
             },
             text: {
-              fill: colors.grey[100],
+              fill: colors.grey[800],
             },
           },
         },
         legends: {
           text: {
-            fill: colors.grey[100],
+            fill: colors.grey[800],
           },
         },
       }}
-      keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
+      keys={["drone1", "drone2", " drone3", "drone4", "drone5", "drone6"]}
       indexBy="country"
       margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
       padding={0.3}

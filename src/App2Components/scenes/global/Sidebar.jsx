@@ -29,7 +29,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
     <MenuItem
       active={selected === title}
       style={{
-        color: colors.grey[100],
+        color: colors.grey[900],
       }}
       onClick={() => setSelected(title)}
       icon={icon}
@@ -125,7 +125,7 @@ const Sidebar = () => {
               <Box textAlign="center">
                 <Typography
                   variant="h2"
-                  color={colors.grey[100]}
+                  color={colors.grey[900]}
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
@@ -203,7 +203,7 @@ const Sidebar = () => {
             <Item
               title="Create Drone"
               to="/dashboard/createDrone"
-              icon={<PersonOutlinedIcon />}
+              icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -217,7 +217,7 @@ const Sidebar = () => {
             <Item
               title="Create Schedular"
               to="/dashboard/createSchedular"
-              icon={<PersonOutlinedIcon />}
+              icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -261,13 +261,6 @@ const Sidebar = () => {
               title="Calendar"
               to="/dashboard/calendar"
               icon={<CalendarTodayOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Invoices"
-              to="/dashboard/invoices"
-              icon={<HelpOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

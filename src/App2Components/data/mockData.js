@@ -376,9 +376,10 @@ export const DroneBarData = [
 ];
 
 export const mockBarData = [
+  
   {
     country: "AD",
-    "hot dog": 137,
+    "drone1": 137,
     "hot dogColor": "hsl(229, 70%, 50%)",
     burger: 96,
     burgerColor: "hsl(296, 70%, 50%)",
@@ -389,7 +390,7 @@ export const mockBarData = [
   },
   {
     country: "AE",
-    "hot dog": 55,
+    "drone2": 55,
     "hot dogColor": "hsl(307, 70%, 50%)",
     burger: 28,
     burgerColor: "hsl(111, 70%, 50%)",
@@ -400,7 +401,7 @@ export const mockBarData = [
   },
   {
     country: "AF",
-    "hot dog": 109,
+    "drone3": 109,
     "hot dogColor": "hsl(72, 70%, 50%)",
     burger: 23,
     burgerColor: "hsl(96, 70%, 50%)",
@@ -411,7 +412,7 @@ export const mockBarData = [
   },
   {
     country: "AG",
-    "hot dog": 133,
+    "drone4": 133,
     "hot dogColor": "hsl(257, 70%, 50%)",
     burger: 52,
     burgerColor: "hsl(326, 70%, 50%)",
@@ -422,7 +423,7 @@ export const mockBarData = [
   },
   {
     country: "AI",
-    "hot dog": 81,
+    "drone5": 81,
     "hot dogColor": "hsl(190, 70%, 50%)",
     burger: 80,
     burgerColor: "hsl(325, 70%, 50%)",
@@ -433,7 +434,7 @@ export const mockBarData = [
   },
   {
     country: "AL",
-    "hot dog": 66,
+    "drone6": 66,
     "hot dogColor": "hsl(208, 70%, 50%)",
     burger: 111,
     burgerColor: "hsl(334, 70%, 50%)",
@@ -444,7 +445,7 @@ export const mockBarData = [
   },
   {
     country: "AM",
-    "hot dog": 80,
+    "drone7": 80,
     "hot dogColor": "hsl(87, 70%, 50%)",
     burger: 47,
     burgerColor: "hsl(141, 70%, 50%)",

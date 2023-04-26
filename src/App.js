@@ -30,6 +30,10 @@ import CreateSchedule from "./App2Components/scenes/CreateSchedule"
 import ViewScheules from "./App2Components/scenes/ViewScheules"
 import CreateDrone from './App2Components/scenes/createDrone';
 import ViewDrone from './App2Components/scenes/viewDrone';
+import CreateMission from './App2Components/scenes/createMission';
+import AddMapForm from './App2Components/scenes/addMap';
+import GetAllMissions from './App2Components/scenes/getMissions';
+import GetAllMaps from './App2Components/scenes/getFarmMaps';
 
 
 function AppContent() {
@@ -62,6 +66,10 @@ function AppContent() {
         <Route path="/dashboard/geography" element={<ViewGeography />} />
         <Route path="/dashboard/contacts" element={<ViewContacts />} />
         <Route path="dashboard/calendar" element={<ViewCalendar />} />
+        <Route path="/dashboard/createMission" element={<CreateMission />} />
+        <Route path="/dashboard/addMap" element={<AddMapForm />} />
+        <Route path="/dashboard/getMissions" element={<GetAllMissions />} />
+        <Route path="/dashboard/getMaps" element={<GetAllMaps />} />
       </Routes>
     </div>
   );

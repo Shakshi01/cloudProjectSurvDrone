@@ -14,6 +14,7 @@ const EditSchedule = () => {
   const { id } = useParams();
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const [missionOptions, setMissionOptions] = useState([]);
+  const [droneOptions, setDroneOptions] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const location = useLocation();
   const schedule_info = location.state.schedule_info;
@@ -22,7 +23,7 @@ const EditSchedule = () => {
     StartTime: schedule_info.start_time,
     EndTime: schedule_info.end_time,
     MissionId: schedule_info.mission_id,
-    Location: schedule_info.location,
+    DroneId: schedule_info.drone_id,
   };
   
   useEffect(() => {
@@ -41,6 +42,22 @@ const EditSchedule = () => {
     }
   };
 
+  useEffect(() => {
+    fetchDroneOptions().then((options) => setDroneOptions(options));
+  }, []);
+
+  const fetchDroneOptions = async () => {
+    try {
+      const response = await axios.get("http://localhost:5001/api/droneOptions", {
+        withCredentials: true,
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching drone options:", error);
+      return [];
+    }
+  };
+
   // Fetch the drone data with the given id
   // ...
 
@@ -50,12 +67,13 @@ const EditSchedule = () => {
   };
 
   const updateRequest = async (values) => {
+    console.log("coming to update request")
     const res = await axios.put(`http://localhost:5001/api/schedules/${values.ScheduledId}`, {
       schedule_id: values.ScheduledId,
       start_time: values.StartTime,
       end_time: values.EndTime,
       mission_id: values.MissionId,
-      location: values.Location,
+      drone_id: values.DroneId,
     }, { withCredentials: true }).catch(err => console.log(err))
     const data = await res.data;
     return data;
@@ -154,19 +172,33 @@ const EditSchedule = () => {
                   {touched.MissionId && errors.MissionId}
                 </FormHelperText>
               </FormControl>
-              <TextField
+              <FormControl
                 fullWidth
                 variant="filled"
-                type="text"
-                label="Location"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.Location}
-                name="Location"
-                error={!!touched.Location && !!errors.Location}
-                helperText={touched.Location && errors.Location}
+                error={!!touched.DroneId && !!errors.DroneId}
                 sx={{ gridColumn: "span 4" }}
-              />
+              >
+                <InputLabel htmlFor="DroneId">Drone ID</InputLabel>
+                <Select
+                  label="Drone ID"
+                  value={values.DroneId}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  inputProps={{
+                    name: "DroneId",
+                    id: "DroneId",
+                  }}
+                >
+                  {droneOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <FormHelperText>
+                  {touched.DroneId && errors.DroneId}
+                </FormHelperText>
+              </FormControl>
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
@@ -185,7 +217,7 @@ const checkoutSchema = yup.object().shape({
   StartTime: yup.string().required("required"),
   EndTime: yup.string().required("required"),
   MissionId: yup.string().required("required"),
-  Location: yup.string().required("required"),
+  DroneId: yup.string().required("required"),
 });
 
 

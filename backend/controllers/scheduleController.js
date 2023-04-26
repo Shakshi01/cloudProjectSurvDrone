@@ -5,8 +5,8 @@ const { Schedule1 } = require('@mui/icons-material');
   
 
 const CreateSchedule=async(req,res,next)=>{
-    const {schedule_id,start_time,end_time,mission_id,location}=req.body;
-    console.log(schedule_id,start_time,end_time,mission_id,location);
+    const {schedule_id,start_time,end_time,mission_id,drone_id}=req.body;
+    console.log(schedule_id,start_time,end_time,mission_id,drone_id);
     let existingSchedule;
     try{
         existingSchedule=await Schedule.findOne({schedule_id:schedule_id});
@@ -23,7 +23,7 @@ const CreateSchedule=async(req,res,next)=>{
         start_time,
         end_time,
         mission_id,
-        location,
+        drone_id,
     });
     console.log("Adding Schedule");
 
@@ -75,7 +75,7 @@ const ViewSchedule=async(req,res,next)=>{
   
   const editSchedule = async (req, res, next) => {
     const { id } = req.params;
-    const { schedule_id,start_time,end_time,mission_id,location } = req.body;
+    const { schedule_id,start_time,end_time,mission_id,drone_id } = req.body;
   
     try {
       const schedule = await Schedule.findOne({ schedule_id: id });
@@ -86,7 +86,7 @@ const ViewSchedule=async(req,res,next)=>{
         schedule.start_time = start_time || schedule.start_time;
         schedule.end_time = end_time || schedule.end_time;
         schedule.mission_id = mission_id || schedule.mission_id;
-        schedule.location = location || schedule.location;
+        schedule.drone_id = drone_id || schedule.drone_id;
   
         await schedule.save();
         res.status(200).json({ message: "Schedule updated successfully", schedule });

@@ -97,6 +97,27 @@ const ViewDrone=async(req,res,next)=>{
     }
   };
   
+  const ViewDroneIdList=async(req,res,next)=>{
+    try {
+        Drone.find({})
+          .exec()
+          .then((drones) => {
+            const droneIds = drones.map((drone) => ({
+              value: drone.drone_id,
+              label: `Drone ${drone.drone_id}`,
+            }));
+            console.log(droneIds);
+            res.json(droneIds);
+          })
+          .catch((err) => {
+            console.log(err);
+            res.status(500).json({ message: "Error retrieving drone IDs." });
+          });
+      } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "Error retrieving drone IDs." });
+      }
+  }
   
   
 const verifyToken=(req,res,next)=>{
@@ -133,4 +154,4 @@ const getDrone=async(req,res,next)=>{
     return res.status(200).json({drone});
 }
 
-module.exports={createDrone,ViewDrone,deleteDrone,editDrone,verifyToken,getDrone};
+module.exports={createDrone,ViewDrone,deleteDrone,editDrone,ViewDroneIdList,verifyToken,getDrone};

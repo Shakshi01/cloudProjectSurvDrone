@@ -6,7 +6,7 @@ const scheduleModel=mongoose.Schema(
         start_time:{type:String,required:true},
         end_time:{type:String, required:true},
         mission_id:{type:String, required:true},
-        location:{type:String,required:true},
+        drone_id:{type:String,required:true},
     },
 );
 

@@ -43,7 +43,7 @@ const ViewSchedules = () => {
     }
   };
   
-  const handleEdit = (row) => {
+  const handleEdit = async (row) => {
     console.log("Edit clicked for schedule_id:", row.schedule_id);
     navigate('/dashboard/editSchedule', { state: { schedule_info: row } });
   };
@@ -94,8 +94,8 @@ const ViewSchedules = () => {
       flex: 1,
     },
     {
-      field: "location",
-      headerName: "Location",
+      field: "drone_id",
+      headerName: "Drone ID",
       flex: 1,
     },
     {

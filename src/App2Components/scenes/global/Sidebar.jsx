@@ -131,11 +131,11 @@ const Sidebar = () => {
                 >
                   {userdetails?.firstname}
                 </Typography>
-                <Url underline="none" onClick={handleOpen}>
-                <Typography variant="h5" color={colors.greenAccent[500]}>
+                {/* <Url underline="none" onClick={handleOpen}> */}
+                <Typography variant="h5" color={colors.greenAccent[500]} onClick={handleOpen}>
                   Profile info
                 </Typography>
-                </Url>
+                {/* </Url> */}
                 <Modal
                   open={open}
                   onClose={handleClose}

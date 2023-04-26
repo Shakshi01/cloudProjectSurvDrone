@@ -63,9 +63,6 @@ const EditSchedule = () => {
     }
   };
 
-  // Fetch the drone data with the given id
-  // ...
-
   const handleFormSubmit = (values) => {
     console.log(values);
     updateRequest(values).then(() => navigate("/dashboard/viewSchedular"));

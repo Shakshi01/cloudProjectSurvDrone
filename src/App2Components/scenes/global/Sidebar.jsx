@@ -222,13 +222,12 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Contacts Information"
-              to="/dashboard/contacts"
-              icon={<ContactsOutlinedIcon />}
+              title="Drone Statistics"
+              to="/dashboard/dronestatistics"
+              icon={<BarChartOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-
             <Typography
               variant="h6"
               color={colors.greenAccent[500]}
@@ -269,6 +268,20 @@ const Sidebar = () => {
               title="Invoices"
               to="/dashboard/invoices"
               icon={<HelpOutlineOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Invoices"
+              to="/dashboard/invoices"
+              icon={<HelpOutlineOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Contacts Information"
+              to="/dashboard/contacts"
+              icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

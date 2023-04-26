@@ -317,6 +317,64 @@ export const mockTransactions = [
   },
 ];
 
+export const DroneBarData = [
+  {
+    country: "Drone1",
+    "Mission1": 137,
+    "hot dogColor": "hsl(229, 70%, 50%)",
+    Mission2: 96,
+    burgerColor: "hsl(296, 70%, 50%)",
+    Mission3: 72,
+    kebabColor: "hsl(97, 70%, 50%)",
+    Mission4: 140,
+    donutColor: "hsl(340, 70%, 50%)",
+  },
+  {
+    country: "Drone2",
+    "Mission1": 55,
+    "hot dogColor": "hsl(307, 70%, 50%)",
+    Mission2: 28,
+    burgerColor: "hsl(111, 70%, 50%)",
+    Mission3: 58,
+    kebabColor: "hsl(273, 70%, 50%)",
+    Mission4: 29,
+    donutColor: "hsl(275, 70%, 50%)",
+  },
+  {
+    country: "Drone3",
+    "Mission1": 109,
+    "hot dogColor": "hsl(72, 70%, 50%)",
+    Mission2: 23,
+    burgerColor: "hsl(96, 70%, 50%)",
+    Mission3: 34,
+    kebabColor: "hsl(106, 70%, 50%)",
+    Mission4: 152,
+    donutColor: "hsl(256, 70%, 50%)",
+  },
+  {
+    country: "Drone4",
+    "Mission1": 133,
+    "hot dogColor": "hsl(257, 70%, 50%)",
+    Mission2: 52,
+    burgerColor: "hsl(326, 70%, 50%)",
+    Mission3: 43,
+    kebabColor: "hsl(110, 70%, 50%)",
+    Mission4: 83,
+    donutColor: "hsl(9, 70%, 50%)",
+  },
+  {
+    country: "Drone5",
+    "Missio1": 81,
+    "hot dogColor": "hsl(190, 70%, 50%)",
+    Mission2: 80,
+    burgerColor: "hsl(325, 70%, 50%)",
+    Mission3: 112,
+    kebabColor: "hsl(54, 70%, 50%)",
+    Mission4: 35,
+    donutColor: "hsl(285, 70%, 50%)",
+  },
+];
+
 export const mockBarData = [
   {
     country: "AD",
@@ -394,6 +452,22 @@ export const mockBarData = [
     kebabColor: "hsl(224, 70%, 50%)",
     donut: 49,
     donutColor: "hsl(274, 70%, 50%)",
+  },
+];
+
+
+export const DronePieData = [
+  {
+    id: "Active",
+    label: "Active Drones",
+    value: 4,
+    color: "hsl(162, 70%, 50%)",
+  },
+  {
+    id: "Inactive",
+    label: "Inactive Drones",
+    value: 2,
+    color: "hsl(104, 70%, 50%)",
   },
 ];
 

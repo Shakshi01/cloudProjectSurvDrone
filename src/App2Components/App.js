@@ -22,6 +22,7 @@ import EditSchedule from "./scenes/EditSchedule";
 import ViewSchedule from "./scenes/ViewScheules";
 import CreateSchedule from "./scenes/CreateSchedule";
 import Calendar from "./scenes/calendar";
+import DroneStatistics from "./components/DroneStatistics";
 
 import './App.css';
 
@@ -121,6 +122,32 @@ export function CreateDronePage() {
               <main className="content">
                 <Routes>
                   <Route path="/" element={<CreateDrone />} />
+                </Routes>
+              </main>
+            </div>
+          </div>
+        </div>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
+}
+
+export function ViewDroneStatistics() {
+  const [theme, colorMode] = useMode();
+  const [isSidebar, setIsSidebar] = useState(true);
+  
+  return (
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="app3">
+          <div className="main-container">
+            <Topbar setIsSidebar={setIsSidebar} />
+            <div className="content-container">
+              <Sidebar isSidebar={isSidebar} />
+              <main className="content">
+                <Routes>
+                  <Route path="/" element={<DroneStatistics />} />
                 </Routes>
               </main>
             </div>

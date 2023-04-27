@@ -236,13 +236,33 @@ const Sidebar = () => {
               Mission Planner
             </Typography>
             <Item
-              title="Mission Planner"
-              to="/dashboard/missionPlanner"
+              title="Create Mission"
+              to="/dashboard/createMission"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-
+            <Item
+              title="Get Missions"
+              to="/dashboard/getMissions"
+              icon={<ReceiptOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Add Farm Map"
+              to="/dashboard/addMap"
+              icon={<ReceiptOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Get Farm Maps"
+              to="/dashboard/getMaps"
+              icon={<ReceiptOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
             <Typography
               variant="h6"
               color={colors.greenAccent[500]}

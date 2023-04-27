@@ -12,10 +12,63 @@ import GeographyChart from "../../components/GeographyChart";
 import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
 import ProgressCircle from "../../components/ProgressCircle";
+import axios from "axios";
+import { useEffect,useState } from "react";
 
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const [usercount,setusercount]=useState(0);
+  const [dronecount,setdronecount]=useState(0);
+  const [missioncount,setmissioncount]=useState(0);
+  const [missions,setmissions]=useState([]);
+
+  const sendRequest = async () => {
+    const res = await axios.get(
+      "http://localhost:5001/api/countdrones"
+    );
+    console.log('Data received from backend:', res.data);
+    return res.data;
+  };
+
+  const sendRequest1 = async () => {
+    const res = await axios.get(
+      "http://localhost:5001/api/countusers"
+    );
+    console.log('Data received from backend:', res.data);
+    return res.data;
+  };
+
+  const sendRequest2 = async () => {
+    const res = await axios.get(
+      "http://localhost:5001/api/countmissions"
+    );
+    console.log('Data received from backend:', res.data);
+    return res.data;
+  };
+
+  const sendRequest3 = async () => {
+    const res = await axios.get(
+      "http://localhost:5001/api/getmissions"
+    );
+    console.log('Data received from backend:', res.data.missions);
+    return res.data.missions;
+  };
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await sendRequest();
+      const data1= await sendRequest1();
+      const data2= await sendRequest2();
+      const data3=await sendRequest3();
+      setdronecount(data);
+      setusercount(data1);
+      setmissioncount(data2);
+      setmissions(data3);
+    }
+    fetchData();
+  }, []);
 
   return (
     <Box m="20px">
@@ -55,8 +108,8 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="61"
-            subtitle="Anomoly detected"
+            title={dronecount}
+            subtitle="No of drones"
             progress="0.75"
             increase="+14%"
             // icon={
@@ -74,7 +127,7 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="25"
+            title={missioncount}
             subtitle="Number of Mission Planner"
             progress="0.41"
             increase="+41%"
@@ -93,7 +146,7 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="10"
+            title={usercount}
             subtitle="Users"
             progress="0.70"
             increase="+70%"
@@ -240,12 +293,12 @@ const Dashboard = () => {
             p="15px"
           >
             <Typography color={colors.grey[900]} variant="h5" fontWeight="600">
-              Recent Transactions
+              Recent Missions
             </Typography>
           </Box>
-          {mockTransactions.map((transaction, i) => (
+          {missions.map((mission, i) => (
             <Box
-              key={`${transaction.txId}-${i}`}
+              key={`${mission.mission_id}-${i}`}
               display="flex"
               justifyContent="space-between"
               alignItems="center"
@@ -258,19 +311,19 @@ const Dashboard = () => {
                   variant="h5"
                   fontWeight="600"
                 >
-                  {transaction.txId}
+                  {mission.mission_id}
                 </Typography>
                 <Typography color={colors.grey[900]}>
-                  {transaction.user}
+                  {mission.location}
                 </Typography>
               </Box>
-              <Box color={colors.grey[900]}>{transaction.date}</Box>
+              <Box color={colors.grey[900]}>{mission.drone_id}</Box>
               <Box
                 backgroundColor={colors.greenAccent[500]}
                 p="5px 10px"
                 borderRadius="4px"
               >
-                ${transaction.cost}
+                {mission.status}
               </Box>
             </Box>
           ))}

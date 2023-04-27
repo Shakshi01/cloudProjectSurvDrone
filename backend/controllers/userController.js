@@ -119,4 +119,17 @@ const getUserProfile=async(req,res,next)=>{
     return res.status(200).json({user});
 }
 
-module.exports={signup,login,verifyToken,getUser,getUserProfile};
+const CountUsers=async(req,res,next)=>{
+    let userscount;
+    try{
+      userscount= await User.count({});
+      console.log("Count of users:",userscount);
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({ message: "Error retrieving Users." });
+      }
+      return res.status(200).json(userscount);
+  }
+
+module.exports={signup,login,verifyToken,getUser,getUserProfile,CountUsers};

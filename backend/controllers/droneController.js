@@ -36,6 +36,19 @@ const createDrone=async(req,res,next)=>{
     return res.status(201).json({message:Drone});
 }
 
+const CountDrones=async(req,res,next)=>{
+  let dronescount;
+  try{
+    dronescount= await Drone.count({});
+    console.log("Count of drones:",dronescount);
+  }
+  catch(err){
+      console.log(err);
+      res.status(500).json({ message: "Error retrieving Drones." });
+    }
+    return res.status(200).json(dronescount);
+}
+
 const ViewDrone=async(req,res,next)=>{
     try{
       Drone.find({}) // pass the query object with the search criteria
@@ -154,4 +167,4 @@ const getDrone=async(req,res,next)=>{
     return res.status(200).json({drone});
 }
 
-module.exports={createDrone,ViewDrone,deleteDrone,editDrone,ViewDroneIdList,verifyToken,getDrone};
+module.exports={createDrone,ViewDrone,deleteDrone,editDrone,ViewDroneIdList,verifyToken,getDrone,CountDrones};

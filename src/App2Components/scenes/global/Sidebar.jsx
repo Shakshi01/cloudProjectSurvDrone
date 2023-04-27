@@ -118,7 +118,7 @@ const Sidebar = () => {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src="https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
+                  src={userdetails.firstname=="gao"? prof:"https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
@@ -129,7 +129,7 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  {userdetails?.firstname}
+                  {userdetails?.role==="admin"?userdetails?.firstname:"Security"}
                 </Typography>
                 {/* <Url underline="none" onClick={handleOpen}> */}
                 <Typography variant="h5" color={colors.greenAccent[500]} onClick={handleOpen}>

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import {Box} from "@mui/material";
 import Header from "../../components/Header";
 import DeleteAllMissionPlans from "../deleteAllMissions";
-
+import DeleteMissionById from "../deleteMissionById";
 
 function GetAllMissions() {
     
@@ -53,6 +53,9 @@ function GetAllMissions() {
             <h1>Manage Mission Plans:</h1>
             <br />
             <DeleteAllMissionPlans />
+            <br />
+            <br />
+            <DeleteMissionById />
         </Box>            
     )
 }

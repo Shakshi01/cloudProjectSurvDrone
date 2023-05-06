@@ -14,11 +14,11 @@ const mapSchema = new mongoose.Schema({
         required: true
     },
     Lat: {
-        type: Float32Array,
+        type: Number,
         required: true
     },
     Long: {
-        type: Float32Array,
+        type: Number,
         required: true
     }
 })

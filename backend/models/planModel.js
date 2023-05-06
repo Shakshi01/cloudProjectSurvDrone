@@ -6,6 +6,11 @@ const CoordsSchema = new mongoose.Schema({
   });
 
 const planSchema = new mongoose.Schema({
+    MissionId:{
+        type:String,
+        required:true,
+        unique:true,
+    },
     MissionType: {
         type: String,
         required: true

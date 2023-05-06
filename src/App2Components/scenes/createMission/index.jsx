@@ -11,6 +11,7 @@ function CreateMission() {
     const navigate = useNavigate();
     
     const [inputData, setInputData] = useState({
+        MissionId:"",
         MissionType: "",
         Location:"",
         FlightPlanCooridnates:"",
@@ -45,6 +46,7 @@ function CreateMission() {
 
     const sendRequest = async() => {
         await axios.post('http://localhost:5001/api/createMissionPlan',{
+            MissionId:inputData.MissionId,
             MissionType:inputData.MissionType,
             Location:inputData.Location,
             FlightPlanCoordinates: coords,
@@ -73,6 +75,8 @@ function CreateMission() {
                     onSubmit={handleSubmit}
                 >
                     <form onSubmit={handleSubmit}>
+                        <label>Specify mission id:</label>
+                        <input type="text" name="MissionId" value={inputData.MissionId} onChange={handleChange} />
                         <label>Select mission service:</label>
                         <select name='MissionType' value={inputData.MissionType} onChange={handleChange}>
                             <option disabled={true} value="">Choose Mission</option>

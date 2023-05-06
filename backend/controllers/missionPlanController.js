@@ -3,6 +3,7 @@ const planModel = require('../models/planModel');
 // create mission report
 exports.createMissionPlan = async (req, res) => {
     const data = new planModel({
+        MissionId: req.body.MissionId,
         MissionType: req.body.MissionType,
         Location: req.body.Location,
         FlightPlanCoordinates: req.body.FlightPlanCoordinates,

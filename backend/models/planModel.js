@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
 
+const CoordsSchema = new mongoose.Schema({
+    lat: String,
+    lng: String
+  });
+
 const planSchema = new mongoose.Schema({
     MissionType: {
         type: String,
@@ -7,20 +12,16 @@ const planSchema = new mongoose.Schema({
     },
     Location: {
         type: String,
-        required: true
     },
-    FlightPlanCoordinates: {
-        type: Array,
-        required: false
-    },
+    FlightPlanCoordinates: {type:[CoordsSchema], default:undefined},
     FlightHeight: {
         type: Number,
         required: true
     },
     Alerts: {
         type: Array,
-        required: true
     }
-})
+});
+
 
 module.exports = mongoose.model('planData', planSchema);

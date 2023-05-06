@@ -4,6 +4,7 @@ import { Box, Button, TextField } from "@mui/material";
 import { Formik } from "formik";
 import Header from "../../components/Header";
 import { useNavigate } from 'react-router-dom';
+import Map from "../ggleMapRender/Map";
 
 function CreateMission() {
 
@@ -20,6 +21,11 @@ function CreateMission() {
 
 
     const [maps, setMaps] = useState([{}]);
+    const [coords,setCoords]=useState([]);
+    const setOrds=(inputs)=>{
+        setCoords(inputs);
+    }
+    console.log("Co-ords from child:",coords);
 
 
     const handleChange=(e)=>{
@@ -41,9 +47,9 @@ function CreateMission() {
         await axios.post('http://localhost:5001/api/createMissionPlan',{
             MissionType:inputData.MissionType,
             Location:inputData.Location,
-            FlightPlanCooridnates: inputData.FlightPlanCooridnates,
+            FlightPlanCoordinates: coords,
             FlightHeight: inputData.FlightHeight,
-            alerts: inputData.Alerts
+            Alerts: inputData.Alerts
         })
         .then((res) => {
             console.log(res);
@@ -93,6 +99,7 @@ function CreateMission() {
                         <button type="submit">Create Mission Plan</button>
                     </form>
                 </Formik>
+                <Map setOrds={setOrds}/>
         </Box>
     )
 }

@@ -12,7 +12,9 @@ function AddMapForm() {
 
     const [inputData, setInputData] = useState({
         Name:"",
-        MapImage: ""
+        Address: "",
+        Lat: "",
+        Long: ""
     });
 
 
@@ -27,7 +29,9 @@ function AddMapForm() {
     const sendRequest = async() => {
         await axios.post('http://localhost:5001/api/addMap', {
             Name: inputData.Name,
-            MapImage: inputData.MapImage
+            Address: inputData.Address,
+            Lat: inputData.Lat,
+            Long: inputData.Long
         })
         .then((res) => {console.log(res);})
         .catch(err => console.log(err));
@@ -47,11 +51,18 @@ function AddMapForm() {
             <Header title="Add new Farm Map" />
                 <Formik onSubmit={handleSubmit}>
                     <form onSubmit={handleSubmit}>
-                        <label for="Name">Map Name:</label><br />
+                        <label for="Name">Map Name:</label>
                         <input type="text" id="Name" name="Name" value={inputData.Name} onChange={handleChange} /><br />
                         <br />
-                        <label for="MapImage">Map Image URL:</label><br />
-                        <input type="text" id="MapImage" name="MapImage" value={inputData.MapImage} onChange={handleChange} /><br />
+                        <label for="Address">Map Address:</label>
+                        <input type="text" id="Address" name="Address" value={inputData.Address} onChange={handleChange} /><br />
+                        <br />
+                        <p><b>PLease specify map location coordinates:</b></p>
+                        <label for="Lat">Latitude</label>
+                        <input type="text" id="Lat" name="Lat" value={inputData.Lat} onChange={handleChange} />
+                        <br />
+                        <label for="Long">Longitude</label>
+                        <input type="text" id="Long" name="Long" value={inputData.Long} onChange={handleChange} />
                         <br />
                         <input type="submit" value="Add New Map" />
                     </form>

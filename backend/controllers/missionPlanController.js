@@ -5,7 +5,7 @@ exports.createMissionPlan = async (req, res) => {
     const data = new planModel({
         MissionType: req.body.MissionType,
         Location: req.body.Location,
-        FlightPlanCoordinates: req.body.Coordinates,
+        FlightPlanCoordinates: req.body.FlightPlanCoordinates,
         FlightHeight: req.body.FlightHeight,
         Alerts: req.body.Alerts
     })

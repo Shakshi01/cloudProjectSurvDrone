@@ -5,12 +5,14 @@ import {Box} from "@mui/material";
 import {Formik} from "formik";
 import Header from "../../components/Header";
 import { useNavigate } from 'react-router-dom';
+import TenantIdSingleton from '../../components/TenantId';
 
 function AddMapForm() {
 
     const navigate = useNavigate();
 
     const [inputData, setInputData] = useState({
+        TenantId: TenantIdSingleton.id,
         Name:"",
         Address: "",
         Lat: "",
@@ -28,6 +30,7 @@ function AddMapForm() {
 
     const sendRequest = async() => {
         await axios.post('http://localhost:5001/api/addMap', {
+            TenantId: inputData.TenantId,
             Name: inputData.Name,
             Address: inputData.Address,
             Lat: inputData.Lat,
@@ -42,7 +45,8 @@ function AddMapForm() {
         e.preventDefault();
         console.log(inputData);
         sendRequest().then(() => alert("Added map succesfully!!"))
-        .then(() => navigate("/dashboard"));
+        console.log(inputData.TenantId);
+        //.then(() => navigate("/dashboard"));
     };
 
     

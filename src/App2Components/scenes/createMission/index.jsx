@@ -5,12 +5,14 @@ import { Formik } from "formik";
 import Header from "../../components/Header";
 import { useNavigate } from 'react-router-dom';
 import Map from "../ggleMapRender/Map";
+import TenantIdSingleton from "../../components/TenantId";
 
 function CreateMission() {
 
     const navigate = useNavigate();
     
     const [inputData, setInputData] = useState({
+        TenantId: TenantIdSingleton.id,
         MissionId:"",
         MissionType: "",
         Location:"",
@@ -38,7 +40,7 @@ function CreateMission() {
 
 
     useEffect(() => {
-        fetch("http://localhost:5001/api/getAllMaps")
+        fetch(`http://localhost:5001/api/getAllMaps/${TenantIdSingleton.id}`)
         .then(res => res.json())
         .then(data => {setMaps(data)});
     }, []);
@@ -46,6 +48,7 @@ function CreateMission() {
 
     const sendRequest = async() => {
         await axios.post('http://localhost:5001/api/createMissionPlan',{
+            TenantId: inputData.TenantId,
             MissionId:inputData.MissionId,
             MissionType:inputData.MissionType,
             Location:inputData.Location,

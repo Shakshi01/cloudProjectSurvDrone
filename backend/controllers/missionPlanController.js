@@ -3,6 +3,7 @@ const planModel = require('../models/planModel');
 // create mission report
 exports.createMissionPlan = async (req, res) => {
     const data = new planModel({
+        TenantId: req.body.TenantId,
         MissionId: req.body.MissionId,
         MissionType: req.body.MissionType,
         Location: req.body.Location,
@@ -12,13 +13,13 @@ exports.createMissionPlan = async (req, res) => {
     })
 
     try {
-        console.log("[INFO] Received POST request: Create new Mission Plan");
+        console.log("[INFO] TenantID = " + req.body.TenantId + " | Received POST request: Create new Mission Plan");
         const dataToSave = await data.save();
         res.status(200).json(dataToSave);
-        console.log("[INFO] Successfully executed POST : created new Mission Plan");
+        console.log("[INFO] TenantID = " + req.body.TenantId + " | Successfully executed POST : created new Mission Plan");
     }
     catch(error) {
-        console.log("[ERROR] Failed to create new Mission Plan");
+        console.log("[ERROR] TenantID = " + req.body.TenantId + " | Failed to create new Mission Plan");
         res.status(400).json({message: error.message});
     }
 }

@@ -3,52 +3,23 @@ import {Box} from "@mui/material";
 import Header from "../../components/Header";
 import DeleteAllMaps from "../deleteAllMaps";
 import DeleteFarmMap from "../deleteMapByName";
+import TenantIdSingleton from "../../components/TenantId";
+import axios from "axios";
+
 
 function GetAllMaps() {
 
     const [maps, setMaps] = useState([{}]);
 
-
     useEffect(() => {
-        fetch('http://localhost:5001/api/getAllMaps')
-        .then(res => res.json())
-        .then(data => {setMaps(data)});
+        const fetch = async() => {
+            const getMaps = await axios.get(`http://localhost:5001/api/getAllMaps/${TenantIdSingleton.id}`);
+            setMaps(getMaps);
+        };
+        fetch()
     }, []);
 
-    
-    const displayMaps = maps.map((info) => {
-        return (
-            <tr>
-                <td>{info.Name}</td>
-                <td>{info.MapImage}</td>
-            </tr>
-        )
-    })
-
-
-    return(
-        <Box m="20px">
-            <Header title="Farm Maps" />
-                <table className="display-maps" border="1" cellpadding="3" cellspacing="2">
-                    <thead>
-                        <tr>
-                            <th>Map Name</th>
-                            <th>Map Image</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {displayMaps}
-                    </tbody>
-                </table>
-                <br />
-                <br />
-                <h1>Manage Maps:</h1>
-                <br />
-                <DeleteAllMaps />
-                <br />
-                <DeleteFarmMap />
-        </Box>
-    )
+    console.log(maps);
 
 }
 

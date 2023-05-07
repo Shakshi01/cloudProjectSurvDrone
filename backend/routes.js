@@ -36,7 +36,7 @@ router.post('/addMap', mapFunctions.uploadMap);
 // GET - get map by name
 router.get('/getMapByName', mapFunctions.getMapByName);
 // GET - get all maps
-router.get('/getAllMaps', mapFunctions.getAllMaps);
+router.get('/getAllMaps/:TenantId', mapFunctions.getAllMaps);
 // GET - get map long and lat by name
 router.get('/getMapLongLatByName', mapFunctions.getMapLatLong);
 // DELETE - delete map by name
@@ -56,7 +56,8 @@ router.put('/updateMissionAlertsById/:id', plannerFunctions.updateMissionAlerts)
 // DELETE - delete all missions plans
 router.delete('/deleteAllMissionPlans', plannerFunctions.deleteAllMissions);
 // DELETE - delete mission plan by id
-router.delete('/deleteMissionPlanById/:id', plannerFunctions.deleteMissionPlanById);
+router.delete('/deleteMissionPlanById/:id/:TenantId', plannerFunctions.deleteMissionPlanById);
+
 
 
 router.get("/countusers",userFunctions.CountUsers);

@@ -5,21 +5,48 @@ import DeleteAllMaps from "../deleteAllMaps";
 import DeleteFarmMap from "../deleteMapByName";
 import TenantIdSingleton from "../../components/TenantId";
 import axios from "axios";
+import Map from '../ggleMapRender/Map';
 
 
 function GetAllMaps() {
 
     const [maps, setMaps] = useState([{}]);
+    let userdetails=JSON.parse(window.sessionStorage.getItem("userdetails"));
+    const TenantId=userdetails.email;
 
     useEffect(() => {
         const fetch = async() => {
-            const getMaps = await axios.get(`http://localhost:5001/api/getAllMaps/${TenantIdSingleton.id}`);
-            setMaps(getMaps);
+            const getMaps = await axios.get(`http://localhost:5001/api/getAllMaps/${TenantId}`);
+            setMaps(getMaps.data);
+            console.log("MAPS",getMaps.data);
         };
         fetch()
     }, []);
 
-    console.log(maps);
+    return(
+        <Box m="20px">
+            <Header title="Farm Maps" />
+            {maps && <div>
+                {maps.map(map => (
+                <>
+                <div key={map._id}>{map.Name}</div>
+                <div key={map._id}>{map.Address}</div>
+                <div key={map._id}>{map.Lat}</div>
+                <div key={map._id}>{map.Long}</div>
+                </>
+                ))
+
+                }
+            </div>}
+                <br />
+                <br />
+                <h1>Manage Maps:</h1>
+                <br />
+                <DeleteAllMaps />
+                <br />
+                {/* <DeleteFarmMap /> */}
+        </Box>
+    )
 
 }
 

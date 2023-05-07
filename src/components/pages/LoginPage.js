@@ -3,6 +3,8 @@ import axios from 'axios';
 import './LoginPage.css';
 import { useNavigate } from 'react-router-dom';
 import { async } from 'q';
+import TenantIdSingleton from '../../App2Components/components/TenantId';
+
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -18,6 +20,8 @@ const LoginPage = () => {
         `http://localhost:5001/api/getuserProfile/${email}`
       );
       console.log("USER DETAILS:",res.data.user);
+      TenantIdSingleton.id = email;
+      Object.freeze(TenantIdSingleton);
       window.sessionStorage.setItem("userdetails",JSON.stringify(res.data.user));
       navigate("/dashboard");
     });

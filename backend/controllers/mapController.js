@@ -10,7 +10,7 @@ exports.uploadMap = async (req, res) => {
         Long: req.body.Long
     })
     try {
-        console.log("[INFO] TenantID =  " + req.body.TenantId + " | Received POST request : add Map to database");
+        console.log("[INFO] TenantID = " + req.body.TenantId + " | Received POST request : add Map to database");
         const dataToSave = await data.save();
         res.status(200).json(dataToSave);
         console.log("[INFO] TenantID = " + req.body.TenantId + " | Successfully executed POST : added new map to database");
@@ -25,15 +25,15 @@ exports.uploadMap = async (req, res) => {
 // fetch all maps/Locations
 exports.getAllMaps = async (req, res) => {
     try {
-        console.log("[INFO] TenantID = " + req.body.TenantId + " | Received GET request : fetching all maps");
+        console.log("[INFO] TenantID = " + req.params.TenantId + " | Received GET request : fetching all maps");
         const data = await mapModel.find(
-            {TenantId: req.body.TenantId}
+            {TenantId: req.params.TenantId}
         );
         res.json(data);
-        console.log("[INFO] TenantID = " + req.body.TenantId + " | Successfully executed GET for all maps");
+        console.log("[INFO] TenantID = " + req.params.TenantId + " | Successfully executed GET for all maps");
     }
     catch(error) {
-        console.log("[ERROR] TenantID = " + req.body.TenantId + " | Failed to execute GET for all maps for user");
+        console.log("[ERROR] TenantID = " + req.params.TenantId + " | Failed to execute GET for all maps for user");
         res.status(500).json({message: error.message});
     }
 }

@@ -6,6 +6,10 @@ const CoordsSchema = new mongoose.Schema({
   });
 
 const planSchema = new mongoose.Schema({
+    TenantId: {
+        type: String, 
+        required: true
+    },
     MissionId:{
         type:String,
         required:true,

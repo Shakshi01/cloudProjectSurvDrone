@@ -8,10 +8,12 @@ import TenantIdSingleton from "../../components/TenantId"
 function GetAllMissions() {
     
     const [missions, setMissions] = useState([{}]);
+    let userdetails=JSON.parse(window.sessionStorage.getItem("userdetails"));
+    const TenantId=userdetails.email;
 
 
     useEffect(() => {
-        fetch(`http://localhost:5001/api/getAllMissionPlans/${TenantIdSingleton.id}`)
+        fetch(`http://localhost:5001/api/getAllMissionPlans/${TenantId}`)
         .then(res => res.json())
         .then(data => {setMissions(data)});
     }, []);

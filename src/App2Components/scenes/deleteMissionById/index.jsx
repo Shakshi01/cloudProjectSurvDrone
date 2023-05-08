@@ -1,10 +1,15 @@
 import React, {useState} from "react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+import TenantIdSingleton from "../../components/TenantId";
 
 function DeleteMissionById() {
 
+    const navigate = useNavigate();
+
     const [missionPlan, setMissionPlan] = useState({
-        _id: ""
+        MissionId: "",
+        TenantId: TenantIdSingleton.id
     });
 
     const handleChange = (e) => {
@@ -15,7 +20,7 @@ function DeleteMissionById() {
     }
 
     const sendRequest = async(id) => {
-        await axios.delete(`http://localhost:5001/api/deleteMissionPlanById/${missionPlan._id}`)
+        await axios.delete(`http://localhost:5001/api/deleteMissionPlanById/${missionPlan.MissionId}/${missionPlan.TenantId}`)
         .then((res) => {
             console.log(res);
         })
@@ -28,9 +33,10 @@ function DeleteMissionById() {
             <form onSubmit={(e) => {
                 e.preventDefault();
                 console.log(missionPlan);
-                sendRequest();
+                sendRequest()
+                .then(() => navigate("/dashboard"));
             }}>
-                <input type="text" name="_id" value={missionPlan._id} onChange={handleChange} />
+                <input type="text" name="MissionId" value={missionPlan.MissionId} onChange={handleChange} />
                 <button type="submit">Delete mission plan</button>
             </form>
         </div>

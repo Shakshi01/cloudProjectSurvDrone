@@ -3,6 +3,7 @@ import {Box} from "@mui/material";
 import Header from "../../components/Header";
 import DeleteAllMissionPlans from "../deleteAllMissions";
 import DeleteMissionById from "../deleteMissionById";
+import TenantIdSingleton from "../../components/TenantId"
 
 function GetAllMissions() {
     
@@ -10,7 +11,7 @@ function GetAllMissions() {
 
 
     useEffect(() => {
-        fetch('http://localhost:5001/api/getAllMissionPlans')
+        fetch(`http://localhost:5001/api/getAllMissionPlans/${TenantIdSingleton.id}`)
         .then(res => res.json())
         .then(data => {setMissions(data)});
     }, []);
@@ -19,17 +20,16 @@ function GetAllMissions() {
     const displayMissionPlans = missions.map((info) => {
         return (
             <tr>
-                <td>{info._id}</td>
+                <td>{info.MissionId}</td>
                 <td>{info.MissionType}</td>
                 <td>{info.Location}</td>
-                <td>{info.FlightPlanCoordinates}</td>
                 <td>{info.FlightHeight}</td>
                 <td>{info.Alerts}</td>
             </tr>
         )
     })
 
-
+    
     return (
         <Box m="20px">
             <Header title="All Mission Plans" />
@@ -39,7 +39,6 @@ function GetAllMissions() {
                             <th>Mission Id</th>
                             <th>Mission Type</th>
                             <th>Location</th>
-                            <th>Cooridnates</th>
                             <th>Flight Height</th>
                             <th>Alerts</th>
                         </tr>

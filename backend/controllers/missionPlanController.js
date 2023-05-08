@@ -28,13 +28,15 @@ exports.createMissionPlan = async (req, res) => {
 // fetch all mission plans
 exports.getAllMissionPlans = async (req, res) => {
     try {
-        console.log("[INFO] Received GET request : fetching all mission plans");
-        const data = await planModel.find();
+        console.log("[INFO] TenantID = " + req.params.TenantId + " | Received GET request : fetching all mission plans");
+        const data = await planModel.find(
+            {TenantId: req.params.TenantId}
+        );
         res.json(data);
-        console.log("[INFO] Successfully executed GET for all mission plans");
+        console.log("[INFO] TenantID = " + req.params.TenantId + " | Successfully executed GET for all mission plans");
     }
     catch(error) {
-        console.log("[ERROR] Failed to execute GET for all mission plans");
+        console.log("[ERROR] TenantID = " + req.params.TenantId + " | Failed to execute GET for all mission plans");
         res.status(500).json({message: error.message});
     }
 }
@@ -43,13 +45,15 @@ exports.getAllMissionPlans = async (req, res) => {
 // fetch mission plan by mission type
 exports.getMissionsPlansByType = async (req, res) => {
     try {
-        console.log("[INFO] Reveived GET request : fetching missions by type: " + req.body.MissionType);
-        const data = await planModel.find({MissionType: req.body.MissionType});
+        console.log("[INFO] TenantID = " + req.params.TenantId + " | Reveived GET request : fetching missions by type: " + req.params.MissionType);
+        const data = await planModel.find(
+            {MissionType: req.params.MissionType, TenantId: req.params.TenantId}
+        );
         res.json(data);
-        console.log("[INFO] Successfully executed GET for missions by type: " + req.body.MissionType);
+        console.log("[INFO] TenantID = " + req.params.TenantId + " | Successfully executed GET for missions by type: " + req.params.MissionType);
     }
     catch(error) {
-        console.log("[ERROR] Failed to execute GET for mission plans by type: " + req.body.MissionType);
+        console.log("[ERROR] TenantID = " + req.params.TenantId + " |  Failed to execute GET for mission plans by type: " + req.params.MissionType);
         res.status(500).json({message: error.message});
     }
 }
@@ -58,13 +62,13 @@ exports.getMissionsPlansByType = async (req, res) => {
 // fetch mission plan by location
 exports.getMissionsByLocation = async (req, res) => {
     try {
-        console.log("[INFO] Received GET request : fetching missions for location: " + req.body.Location);
-        const data = await planModel.find({Location: req.body.Location});
+        console.log("[INFO] TenantID = " + req.params.TenantId + " | Received GET request : fetching missions for location: " + req.params.Location);
+        const data = await planModel.find({Location: req.params.Location});
         res.json(data);
-        console.log("[INFO] Successfully executed GET for missions at location: " + req.body.Location);
+        console.log("[INFO] TenantID = " + req.params.TenantId + " | Successfully executed GET for missions at location: " + req.params.Location);
     }
     catch(error) {
-        console.log("[ERROR] Failed to execute GET for missions at location: " + req.body.Location);
+        console.log("[ERROR] TenantID = " + req.params.TenantId + " | Failed to execute GET for missions at location: " + req.params.Location);
         res.status(500).json({message: error.message});
     }
 }
@@ -73,17 +77,17 @@ exports.getMissionsByLocation = async (req, res) => {
 // Update mission plan Alerts
 exports.updateMissionAlerts = async (req, res) => {
     try {
-        console.log("[INFO] Received UPDATE request : updating mission alerts");
-        const id = req.params.id;
+        console.log("[INFO] Drone request | Received UPDATE request : updating mission alerts");
+        const id = req.body.id;
         const updateData = {$push: {Alerts: req.body.Alerts} };
         const options = {new: true};
 
         const result = await planModel.findByIdAndUpdate(id, updateData, options);
         res.json(result);
-        console.log("[INFO] Successfully executed UPDATE for mission alerts");
+        console.log("[INFO] Drone request | Successfully executed UPDATE for mission alerts");
     }
     catch(error) {
-        console.log("[ERROR] Failed to execute UPDATE for mission alerts");
+        console.log("[ERROR] Drone request |  Failed to execute UPDATE for mission alerts");
         res.status(500).json({message: error.message});
     }
 }
@@ -92,13 +96,15 @@ exports.updateMissionAlerts = async (req, res) => {
 // delete all missions
 exports.deleteAllMissions = async (req, res) => {
     try {
-        console.log("[INFO] Received DELETE request : delete all mission plans");
-        const data = await planModel.deleteMany();
+        console.log("[INFO] TenantID = " + req.params.TenantId + " | Received DELETE request : delete all mission plans");
+        const data = await planModel.deleteMany(
+            {TenantId: req.params.TenantId}
+        );
         res.status(200).json({message: "Deleted all mission plans"});
-        console.log("[INFO] Successfully executed DELETE for mission plans");
+        console.log("[INFO] TenantID = " + req.params.TenantId + " | Successfully executed DELETE for mission plans");
     }
     catch(error) {
-        console.log("[ERROR] Failed to execute DELETE for all mission plans");
+        console.log("[ERROR] TenantID = " + req.params.TenantId + " | Failed to execute DELETE for all mission plans");
         res.status(500).json({message: error.message});
     }
 }
@@ -107,13 +113,15 @@ exports.deleteAllMissions = async (req, res) => {
 // delete mission plan by id
 exports.deleteMissionPlanById = async (req, res) => {
     try {
-        console.log("[INFO] Received DELETE request : delete mission plan with id: " + req.params.id);
-        const data = await planModel.findByIdAndDelete(req.param.id);
+        console.log("[INFO] TenantID = " + req.params.TenantId + " | Received DELETE request : delete mission plan with id: " + req.params.id);
+        const data = await planModel.deleteMany(
+            {MissionId: req.params.MissionId, TenantId: req.params.TenantId}
+        );
         res.status(200).json({message: "Deleted mission plan with id: " + req.params.id});
-        console.log("[INFO] Successfully executed DELETE for mission plan with id: " + req.params.id);
+        console.log("[INFO] TenantID = " + req.params.TenantId + " | Successfully executed DELETE for mission plan with id: " + req.params.id);
     }
     catch(error) {
-        console.log("[ERROR] Failed to execite DELETE by mission plan id");
+        console.log("[ERROR] TenantID = " + req.params.TenantId + " | Failed to execite DELETE by mission plan id");
         res.status(500).json({message: error.message});
     }
 }

@@ -46,17 +46,17 @@ router.delete('/deleteAllMaps', mapFunctions.deleteAllMaps);
 // POST - add new mission plan
 router.post('/createMissionPlan', plannerFunctions.createMissionPlan);
 // GET - get all mission plans
-router.get('/getAllMissionPlans', plannerFunctions.getAllMissionPlans);
+router.get('/getAllMissionPlans/:TenantId', plannerFunctions.getAllMissionPlans);
 // GET - get mission plans by mission-type
-router.get('/getMissionPlansByType', plannerFunctions.getMissionsPlansByType);
+router.get('/getMissionPlansByType/:TenantId/:MissionType', plannerFunctions.getMissionsPlansByType);
 // GET - get mission plan by Location
-router.get('/getMissionPlansByLocation', plannerFunctions.getMissionsByLocation);
+router.get('/getMissionPlansByLocation/:TenantId/:Location', plannerFunctions.getMissionsByLocation);
 // UPDATE - update mission alerts by id
-router.put('/updateMissionAlertsById/:id', plannerFunctions.updateMissionAlerts);
+router.put('/updateMissionAlertsById', plannerFunctions.updateMissionAlerts);
 // DELETE - delete all missions plans
-router.delete('/deleteAllMissionPlans', plannerFunctions.deleteAllMissions);
+router.delete('/deleteAllMissionPlans/:TenantId', plannerFunctions.deleteAllMissions);
 // DELETE - delete mission plan by id
-router.delete('/deleteMissionPlanById/:id/:TenantId', plannerFunctions.deleteMissionPlanById);
+router.delete('/deleteMissionPlanById/:MissionId/:TenantId', plannerFunctions.deleteMissionPlanById);
 
 
 

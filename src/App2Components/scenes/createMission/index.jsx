@@ -43,6 +43,7 @@ function CreateMission() {
     
     const handleLocationChange=(e)=>{
         console.log(e)
+        console.log(e.target.value)
         let maps=JSON.parse(window.sessionStorage.getItem("maps"));
         const activemap=maps.filter(map=> e.target.value==map.Name);
         console.log("AM:",activemap)
@@ -145,7 +146,7 @@ function CreateMission() {
                                     }}
                                     >
                                     {missionOptions.map((option) => (
-                                        <MenuItem key={option.Name} value={option.Name}>
+                                        <MenuItem key={option.value} value={option.value}>
                                         {option.label}
                                         </MenuItem>
                                     ))}
@@ -172,8 +173,8 @@ function CreateMission() {
                                     }}
                                     >
                                     {maps.map((option) => (
-                                        <MenuItem key={option.value} value={option.value}>
-                                        {option.label}
+                                        <MenuItem key={option.id} value={option.id}>
+                                        {option.Name}
                                         </MenuItem>
                                     ))}
                                     </Select>

@@ -98,15 +98,15 @@ exports.deleteMapByName = async (req, res) => {
 // delete all map entries
 exports.deleteAllMaps = async (req, res) => {
     try {
-        console.log("[INFO] TenantID = " + req.body.TenantId + " | Received DELETE request : deleting all maps");
+        console.log("[INFO] TenantID = " + req.params.TenantId + " | Received DELETE request : deleting all maps");
         const data = await mapModel.deleteMany(
-            {TenantId: req.body.TenantId}
+            {TenantId: req.params.TenantId}
         );
-        res.status(200).json({message: "[INFO] TenantID = " + req.body.TenantId + " | Deleted all maps"})
-        console.log("[INFO] TenantID = " + req.body.TenantId + " | Successfully deleted all maps");
+        res.status(200).json({message: "[INFO] TenantID = " + req.params.TenantId + " | Deleted all maps"})
+        console.log("[INFO] TenantID = " + req.params.TenantId + " | Successfully deleted all maps");
     }
     catch(error) {
-        console.log("[ERROR] TenantID = " + req.body.TenantId + " | Failed to execute DELETE for all maps");
+        console.log("[ERROR] TenantID = " + req.params.TenantId + " | Failed to execute DELETE for all maps");
         res.status(500).json({message: error.message});
     }
 }

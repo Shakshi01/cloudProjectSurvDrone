@@ -25,7 +25,7 @@ function GetAllMaps() {
 
     return(
         <Box m="20px">
-            <Header title="Farm Maps" />
+            <Header title="Location Maps" />
             {maps && <div>
                 {maps.map(map => (
                 <>

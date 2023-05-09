@@ -10,9 +10,12 @@ import TenantIdSingleton from "../../components/TenantId";
 function CreateMission() {
 
     const navigate = useNavigate();
+
+    let userdetails=JSON.parse(window.sessionStorage.getItem("userdetails"));
+    const TenantId=userdetails.email;
     
     const [inputData, setInputData] = useState({
-        TenantId: TenantIdSingleton.id,
+        TenantId: TenantId,
         MissionId:"",
         MissionType: "",
         Location:"",
@@ -24,10 +27,7 @@ function CreateMission() {
 
 
     const [maps, setMaps] = useState([{}]);
-    const [coords,setCoords]=useState([]);
-    const setOrds=(inputs)=>{
-        setCoords(inputs);
-    }
+    const [coords,setCoords]=useState(null);
     console.log("Co-ords from child:",coords);
 
 
@@ -36,14 +36,24 @@ function CreateMission() {
             ...prev,
             [e.target.name]:e.target.value,
         }))
+        if(e.target.name==="Location"){
+            let maps=JSON.parse(window.sessionStorage.getItem("maps"));
+            const activemap=maps.filter(map=> e.target.value==map.Name);
+            console.log("AM:",activemap)
+            setCoords({lat:activemap[0].Lat,lng:activemap[0].Long});
+            console.log("C:",coords)
+        }
     }
 
 
     useEffect(() => {
-        fetch(`http://localhost:5001/api/getAllMaps/${TenantIdSingleton.id}`)
+        fetch(`http://localhost:5001/api/getAllMaps/${TenantId}`)
         .then(res => res.json())
-        .then(data => {setMaps(data)});
+        .then(data => {setMaps(data); console.log("MAPS:",data);window.sessionStorage.setItem("maps",JSON.stringify(data));});
     }, []);
+    useEffect(()=>{
+
+    },[coords])
 
 
     const sendRequest = async() => {
@@ -106,7 +116,7 @@ function CreateMission() {
                         <button type="submit">Create Mission Plan</button>
                     </form>
                 </Formik>
-                <Map setOrds={setOrds}/>
+                <Map center={coords}/>
         </Box>
     )
 }

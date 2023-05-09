@@ -6,21 +6,27 @@ const containerStyle = {
     height: '600px'
   };
   
-  const center = {
-    lat: 37.33590253146588,
-    lng: -121.88253879547119
-  };
+  
   
   function Map(props) {
     const { isLoaded } = useJsApiLoader({
       id: 'google-map-script',
       googleMapsApiKey: "AIzaSyAyOOeicrTp_8wTLPxp-64TCuwl_-OvntM"
     })
+
+    console.log("CENTERchild:",props.center);
+
+    // const center = {
+    //   lat: 37.33590253146588,
+    //   lng: -121.88253879547119
+    // };
+
+    const center=props.center?props.center:{lat:37.33590253146588,lng:-121.88253879547119};
   
     const [lat,setLat] =React.useState(null);
     const [lng,setLng] =React.useState(null);
     const [markers,setMarkers]=React.useState([]);
-    props.setOrds(markers);
+    //props.setOrds(markers);
     console.log("MARKERS:",markers);
 
     const placeClicked = (e) => {

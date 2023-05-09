@@ -42,7 +42,7 @@ router.get('/getMapLongLatByName', mapFunctions.getMapLatLong);
 // DELETE - delete map by name
 router.delete('/deleteMapByName', mapFunctions.deleteMapByName);
 // DELETE - delete all maps
-router.delete('/deleteAllMaps', mapFunctions.deleteAllMaps);
+router.delete('/deleteAllMaps/:TenantId', mapFunctions.deleteAllMaps);
 // POST - add new mission plan
 router.post('/createMissionPlan', plannerFunctions.createMissionPlan);
 // GET - get all mission plans

@@ -63,7 +63,7 @@ function AddMapForm() {
     
     return (
         <Box m="20px">
-            <Header title="Add new Farm Map" />
+            <Header title="Add New Map" />
                 <Formik onSubmit={handleSubmit}>
                     <form onSubmit={handleSubmit}>
                         <label for="Name">Map Name:</label>

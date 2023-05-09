@@ -21,7 +21,7 @@ function DeleteAllMissionPlans() {
 
     return (
         <div className="delete-all-missions-button">
-            <h3>Delete all Maps</h3>
+            <h3>Delete all Mission Plans</h3>
             <form onSubmit={(e) => {
                 sendRequest()
                 .then(() => navigate("/dashboard"));

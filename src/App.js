@@ -11,6 +11,7 @@ import HeroSection from './components/HeroSection';
 import LoginPage from './components/pages/LoginPage';
 import RegisterPage from './components/pages/RegisterPage';
 import {ViewDronePage,CreateDronePage,EditDronePage,ViewDroneStatistics} from './App2Components/App';
+import {GetMissionsPage,CreateMissionPage, GetFarmsPage, CreateMapPage} from './App2Components/App';
 import {ViewDashboard,ViewSchedulePage,CreateSchedulePage,EditSchedulePage} from './App2Components/App';
 import {ViewBar,ViewPie,ViewLine,ViewFaq,ViewGeography,ViewContacts,ViewCalendar} from './App2Components/App';
 
@@ -66,10 +67,10 @@ function AppContent() {
         <Route path="/dashboard/geography" element={<ViewGeography />} />
         <Route path="/dashboard/contacts" element={<ViewContacts />} />
         <Route path="dashboard/calendar" element={<ViewCalendar />} />
-        <Route path="/dashboard/createMission" element={<CreateMission />} />
-        <Route path="/dashboard/addMap" element={<AddMapForm />} />
-        <Route path="/dashboard/getMissions" element={<GetAllMissions />} />
-        <Route path="/dashboard/getMaps" element={<GetAllMaps />} />
+        <Route path="/dashboard/createMission" element={<CreateMissionPage />} />
+        <Route path="/dashboard/addMap" element={<CreateMapPage />} />
+        <Route path="/dashboard/getMissions" element={<GetMissionsPage />} />
+        <Route path="/dashboard/getMaps" element={<GetFarmsPage />} />
       </Routes>
     </div>
   );

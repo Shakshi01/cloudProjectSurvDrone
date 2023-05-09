@@ -1,19 +1,29 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField, FormControl, InputLabel, Select, MenuItem, FormHelperText, Typography } from "@mui/material";
 import { Formik } from "formik";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import { useNavigate } from 'react-router-dom';
 import Map from "../ggleMapRender/Map";
 import TenantIdSingleton from "../../components/TenantId";
+import * as yup from "yup";
 
 function CreateMission() {
 
     const navigate = useNavigate();
-
+    const isNonMobile = useMediaQuery("(min-width:600px)");
+    const [missionOptions, setMissionOptions] = useState([
+        { value: 'Spraying', label: 'Spraying' },
+        { value: 'Soil Sampling', label: 'Soil Sampling' },
+        { value: 'Crop Health Scout', label: 'Crop Health Scout' },
+        { value: 'Trench Patrol', label: 'Trench Patrol' },
+        { value: 'Infrastructure Scout', label: 'Infrastructure Scout' }
+      ]);
+    const [errorMessage, setErrorMessage] = useState("");
     let userdetails=JSON.parse(window.sessionStorage.getItem("userdetails"));
     const TenantId=userdetails.email;
-    
+    /*
     const [inputData, setInputData] = useState({
         TenantId: TenantId,
         MissionId:"",
@@ -24,27 +34,22 @@ function CreateMission() {
         Alerts:""
         
     });
-
+    */
 
     const [maps, setMaps] = useState([{}]);
     const [coords,setCoords]=useState(null);
     console.log("Co-ords from child:",coords);
 
-
-    const handleChange=(e)=>{
-        setInputData((prev)=>({
-            ...prev,
-            [e.target.name]:e.target.value,
-        }))
-        if(e.target.name==="Location"){
-            let maps=JSON.parse(window.sessionStorage.getItem("maps"));
-            const activemap=maps.filter(map=> e.target.value==map.Name);
-            console.log("AM:",activemap)
-            setCoords({lat:activemap[0].Lat,lng:activemap[0].Long});
-            console.log("C:",coords)
-        }
+    
+    const handleLocationChange=(e)=>{
+        console.log(e)
+        let maps=JSON.parse(window.sessionStorage.getItem("maps"));
+        const activemap=maps.filter(map=> e.target.value==map.Name);
+        console.log("AM:",activemap)
+        setCoords({lat:activemap[0].Lat,lng:activemap[0].Long});
+        console.log("C:",coords)
     }
-
+    
 
     useEffect(() => {
         fetch(`http://localhost:5001/api/getAllMaps/${TenantId}`)
@@ -56,15 +61,15 @@ function CreateMission() {
     },[coords])
 
 
-    const sendRequest = async() => {
+    const sendRequest = async(values) => {
         await axios.post('http://localhost:5001/api/createMissionPlan',{
-            TenantId: inputData.TenantId,
-            MissionId:inputData.MissionId,
-            MissionType:inputData.MissionType,
-            Location:inputData.Location,
+            TenantId: TenantId,
+            MissionId:values.MissionId,
+            MissionType:values.MissionType,
+            Location:values.Location,
             FlightPlanCoordinates: coords,
-            FlightHeight: inputData.FlightHeight,
-            Alerts: inputData.Alerts
+            FlightHeight: values.FlightHeight,
+            Alerts: values.Alerts
         })
         .then((res) => {
             console.log(res);
@@ -73,52 +78,155 @@ function CreateMission() {
     }
 
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(inputData);
-        sendRequest().then(()=>alert("Added mission plan to db!"))
-        .then(() => navigate("/dashboard"));
+    const handleFormSubmit = async(values) => {
+        //e.preventDefault();
+        console.log(values);
+        const responseData = await sendRequest(values);
+        if (responseData) {
+            alert("Added mission plan to db!")
+            navigate("/dashboard");
+        }
     }
-
+    console.log("Shakshi:",maps);
 
     return (
         <Box m="20px">
             <Header title="Create New Mission Plan" />
                 <Formik
-                    onSubmit={handleSubmit}
+                    onSubmit={handleFormSubmit}
+                    initialValues={initialValues}
+                    validationSchema={checkoutSchema}
                 >
-                    <form onSubmit={handleSubmit}>
-                        <label>Specify mission id:</label>
-                        <input type="text" name="MissionId" value={inputData.MissionId} onChange={handleChange} />
-                        <label>Select mission service:</label>
-                        <select name='MissionType' value={inputData.MissionType} onChange={handleChange}>
-                            <option disabled={true} value="">Choose Mission</option>
-                            <option value={"Spraying"}>Spraying</option>
-                            <option value={"Soil Sampling"}>Soil Sampling</option>
-                            <option value={"Crop Health Scout"}>Crop Health Scout</option>
-                            <option value={"Trench Patrol"}>Trench Patrol</option>
-                            <option value={"Infrastructure Scout"}>Infrastructure Scout</option>
-                        </select>
-                        <br />
-                        <br />
-                        <label>Select service location:</label>
-                        <select name='Location' value={inputData.Location} onChange={handleChange}>
-                            <option disabled={true} value="">Choose Location</option>
-                            {maps.map((maps) => {
-                                return (<option key={maps.id} value={maps.id}>{maps.Name}</option>)
-                            })}
-                        </select>
-                        <br />
-                        <br />
-                        <label>Specify mission flight height:</label>
-                        <input type="text" name="FlightHeight" value={inputData.FlightHeight} onChange={handleChange} />
-                        <br />
-                        <button type="submit">Create Mission Plan</button>
-                    </form>
+                    {({
+                    values,
+                    errors,
+                    touched,
+                    handleBlur,
+                    handleChange,
+                    handleSubmit,
+                    }) => (
+                        <form onSubmit={handleSubmit}>
+                            <Box
+                            display="grid"
+                            gap="30px"
+                            gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+                            sx={{
+                                "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+                            }}
+                            >
+                                <TextField
+                                    fullWidth
+                                    variant="filled"
+                                    type="text"
+                                    label="Mission ID"
+                                    onBlur={handleBlur}
+                                    onChange={handleChange}
+                                    value={values.MissionId}
+                                    name="MissionId"
+                                    error={!!touched.MissionId && !!errors.MissionId}
+                                    helperText={touched.MissionId && errors.MissionId}
+                                    sx={{ gridColumn: "span 4" }}
+                                />
+                                <FormControl
+                                    fullWidth
+                                    variant="filled"
+                                    error={!!touched.MissionType && !!errors.MissionType}
+                                    sx={{ gridColumn: "span 4" }}
+                                >
+                                    <InputLabel htmlFor="MissionType">Mission Type</InputLabel>
+                                    <Select
+                                    label="Mission Type"
+                                    value={values.MissionType}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    inputProps={{
+                                        name: "MissionType",
+                                        id: "MissionType",
+                                    }}
+                                    >
+                                    {missionOptions.map((option) => (
+                                        <MenuItem key={option.Name} value={option.Name}>
+                                        {option.label}
+                                        </MenuItem>
+                                    ))}
+                                    </Select>
+                                    <FormHelperText>
+                                    {touched.MissionType && errors.MissionType}
+                                    </FormHelperText>
+                                </FormControl>
+                                <FormControl
+                                    fullWidth
+                                    variant="filled"
+                                    error={!!touched.Location && !!errors.Location}
+                                    sx={{ gridColumn: "span 4" }}
+                                >
+                                    <InputLabel htmlFor="Location">Service Location</InputLabel>
+                                    <Select
+                                    label="Location"
+                                    value={values.Location}
+                                    onChange={handleLocationChange}
+                                    onBlur={handleBlur}
+                                    inputProps={{
+                                        name: "Location",
+                                        id: "Location",
+                                    }}
+                                    >
+                                    {maps.map((option) => (
+                                        <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                        </MenuItem>
+                                    ))}
+                                    </Select>
+                                    <FormHelperText>
+                                    {touched.Location && errors.Location}
+                                    </FormHelperText>
+                                </FormControl>
+                                <TextField
+                                    fullWidth
+                                    variant="filled"
+                                    type="text"
+                                    label="Flight Height"
+                                    onBlur={handleBlur}
+                                    onChange={handleChange}
+                                    value={values.FlightHeight}
+                                    name="FlightHeight"
+                                    error={!!touched.FlightHeight && !!errors.FlightHeight}
+                                    helperText={touched.FlightHeight && errors.FlightHeight}
+                                    sx={{ gridColumn: "span 4" }}
+                                />
+                            </Box>
+                            <Box display="flex" justifyContent="end" mt="20px">
+                                <Button type="submit" color="secondary" variant="contained">
+                                    Create Mission Plan
+                                </Button>
+                            </Box>
+                            {errorMessage && (
+                            <Box mt="10px">
+                                <Typography color="error">{errorMessage}</Typography>
+                            </Box>
+                            )}
+                            <br />
+                            <br />
+                        </form>
+                    )}
                 </Formik>
                 <Map center={coords}/>
         </Box>
     )
-}
+};
+const checkoutSchema = yup.object().shape({
+    MissionId: yup.string().required("required"),
+    MissionType: yup.string().required("required"),
+    //Location: yup.string().required("required"),
+    //FlightPlanCooridnates: yup.string().required("required"),
+    FlightHeight: yup.string().required("required"),
+    //Alerts:yup.string().required("required"),
+});
+const initialValues = {
+    MissionId:"",
+    MissionType: "",
+    Location:"",
+    FlightHeight: "",
+};
 
 export default CreateMission;

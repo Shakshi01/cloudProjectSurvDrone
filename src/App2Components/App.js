@@ -23,7 +23,7 @@ import ViewSchedule from "./scenes/ViewScheules";
 import CreateSchedule from "./scenes/CreateSchedule";
 import Calendar from "./scenes/calendar";
 import DroneStatistics from "./components/DroneStatistics";
-import CreateMission from "./scenes/createMission";
+import CreateMission from "./scenes/createMission2";
 import AddMapForm from "./scenes/addMap";
 import GetAllMissions from "./scenes/getMissions";
 import GetAllMaps from "./scenes/getFarmMaps";

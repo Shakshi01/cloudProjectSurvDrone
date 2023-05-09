@@ -14,7 +14,7 @@ function CreateMission() {
     const navigate = useNavigate();
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const [missionOptions, setMissionOptions] = useState([
-        { value: 'Spraying', label: 'Spraying' },
+        { value: 'Spraying2', label: 'Spraying2' },
         { value: 'Soil Sampling', label: 'Soil Sampling' },
         { value: 'Crop Health Scout', label: 'Crop Health Scout' },
         { value: 'Trench Patrol', label: 'Trench Patrol' },
@@ -182,6 +182,7 @@ function CreateMission() {
                                     {touched.Location && errors.Location}
                                     </FormHelperText>
                                 </FormControl>
+
                                 <TextField
                                     fullWidth
                                     variant="filled"

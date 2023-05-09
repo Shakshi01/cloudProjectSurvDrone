@@ -12,7 +12,7 @@ const containerStyle = {
       googleMapsApiKey: "AIzaSyAyOOeicrTp_8wTLPxp-64TCuwl_-OvntM"
     })
 
-    const center={lat:37.33590253146588,lng:-121.88253879547119};
+    const center=props.location.lat?props.location:{lat:37.33590253146588,lng:-121.88253879547119};
     const [marker,setMarkers]=React.useState({});
 
     const placeClicked = (e) => {

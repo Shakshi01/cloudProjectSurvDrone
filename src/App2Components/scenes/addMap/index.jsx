@@ -14,7 +14,7 @@ function AddMapForm() {
 
     const navigate = useNavigate();
     
-    const [location,setLocation]=React.useState({});
+    const [location,setLocation]=React.useState({lat:null,lng:null});
     let userdetails=JSON.parse(window.sessionStorage.getItem("userdetails"));
     const TenantId=userdetails.email;
 
@@ -22,8 +22,8 @@ function AddMapForm() {
         TenantId: TenantId,
         Name:"",
         Address: "",
-        Lat: location.lat,
-        Long: location.lng
+        Lat: location?.lat,
+        Long: location?.lng
     });
 
     useEffect(()=>{
@@ -80,7 +80,7 @@ function AddMapForm() {
                         <input type="text" id="Long" name="Long" value={location.lat} onChange={handleChange} />
                         <br />
                         <input type="submit" value="Add New Map" />
-                        <Map1 setLocation={setLocation}/>
+                        <Map1 location={location} setLocation={setLocation}/>
                     </form>
                 </Formik>
         </Box>

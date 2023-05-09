@@ -1,16 +1,18 @@
 import React from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-import TenantIdSingleton from "../../components/TenantId";
 
 
 function DeleteAllMissionPlans() {
 
     const navigate = useNavigate();
 
+    let userdetails=JSON.parse(window.sessionStorage.getItem("userdetails"));
+    const TenantId=userdetails.email;
+
 
     const sendRequest = async(id) => {
-        await axios.delete(`http://localhost:5001/api/deleteAllMissionPlans/${TenantIdSingleton.id}`)
+        await axios.delete(`http://localhost:5001/api/deleteAllMissionPlans/${TenantId}`)
         .then((res) => {
             console.log(res);
         })

@@ -26,7 +26,7 @@ router.delete("/drones/:id", droneFunctions.deleteDrone);
 router.put("/drones/:id", droneFunctions.editDrone);
 router.get('/viewdrone',droneFunctions.ViewDrone);
 router.get("/countdrones",droneFunctions.CountDrones);
-router.get('/missionOptions',missionFunctions.ViewMissionIdList);
+router.get('/missionOptions',plannerFunctions.ViewMissionPlanIdList);
 router.get('/droneOptions',droneFunctions.ViewDroneIdList);
 router.get('/user',userFunctions.verifyToken,userFunctions.getUser);
 router.get('/getuserProfile/:email',userFunctions.getUserProfile);

@@ -125,3 +125,25 @@ exports.deleteMissionPlanById = async (req, res) => {
         res.status(500).json({message: error.message});
     }
 }
+
+exports.ViewMissionPlanIdList=async(req,res,next)=>{
+    try {
+        planModel.find({})
+          .exec()
+          .then((missions) => {
+            const missionIds = missions.map((mission) => ({
+              value: mission.MissionId,
+              label: `Mission ${mission.MissionId}`,
+            }));
+            console.log(missionIds);
+            res.json(missionIds);
+          })
+          .catch((err) => {
+            console.log(err);
+            res.status(500).json({ message: "Error retrieving mission IDs." });
+          });
+      } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "Error retrieving mission IDs." });
+      }
+  }

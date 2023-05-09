@@ -26,7 +26,7 @@ import DroneStatistics from "./components/DroneStatistics";
 import CreateMission from "./scenes/createMission";
 import AddMapForm from "./scenes/addMap";
 import GetAllMissions from "./scenes/getMissions";
-import GetAllMaps from "./scenes/getFarmMaps2";
+import GetAllMaps from "./scenes/getFarmMaps";
 
 import './App.css';
 

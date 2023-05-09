@@ -1,23 +1,34 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import axios from 'axios';
 import {Box} from "@mui/material";
 import {Formik} from "formik";
 import Header from "../../components/Header";
 import { useNavigate } from 'react-router-dom';
 import TenantIdSingleton from '../../components/TenantId';
+import Map1 from '../ggleMapRender/Map1';
 
 function AddMapForm() {
 
+    
+
     const navigate = useNavigate();
+    
+    const [location,setLocation]=React.useState({});
+    let userdetails=JSON.parse(window.sessionStorage.getItem("userdetails"));
+    const TenantId=userdetails.email;
 
     const [inputData, setInputData] = useState({
-        TenantId: TenantIdSingleton.id,
+        TenantId: TenantId,
         Name:"",
         Address: "",
-        Lat: "",
-        Long: ""
+        Lat: location.lat,
+        Long: location.lng
     });
+
+    useEffect(()=>{
+
+    },[location])
 
 
     const handleChange = (e) => {
@@ -33,8 +44,8 @@ function AddMapForm() {
             TenantId: inputData.TenantId,
             Name: inputData.Name,
             Address: inputData.Address,
-            Lat: inputData.Lat,
-            Long: inputData.Long
+            Lat: location.lat,
+            Long: location.lng
         })
         .then((res) => {console.log(res);})
         .catch(err => console.log(err));
@@ -63,12 +74,13 @@ function AddMapForm() {
                         <br />
                         <p><b>PLease specify map location coordinates:</b></p>
                         <label for="Lat">Latitude</label>
-                        <input type="text" id="Lat" name="Lat" value={inputData.Lat} onChange={handleChange} />
+                        <input type="text" id="Lat" name="Lat" value={location.lat} onChange={handleChange} />
                         <br />
                         <label for="Long">Longitude</label>
-                        <input type="text" id="Long" name="Long" value={inputData.Long} onChange={handleChange} />
+                        <input type="text" id="Long" name="Long" value={location.lat} onChange={handleChange} />
                         <br />
                         <input type="submit" value="Add New Map" />
+                        <Map1 setLocation={setLocation}/>
                     </form>
                 </Formik>
         </Box>

@@ -86,7 +86,7 @@ function GetAllMaps() {
                 },
               }}
             >
-              <DataGrid checkboxSelection rows={maps} columns={columns} getRowId={(row) => row._id} />
+              <DataGrid checkboxSelection rows={maps} columns={columns} getRowId={(row) => row.Name} />
             </Box>
             :
             <Typography>Loading...</Typography>

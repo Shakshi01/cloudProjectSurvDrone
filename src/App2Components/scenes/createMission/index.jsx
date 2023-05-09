@@ -14,11 +14,11 @@ function CreateMission() {
     const navigate = useNavigate();
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const [missionOptions, setMissionOptions] = useState([
-        { value: 'Spraying2', label: 'Spraying2' },
-        { value: 'Soil Sampling', label: 'Soil Sampling' },
-        { value: 'Crop Health Scout', label: 'Crop Health Scout' },
-        { value: 'Trench Patrol', label: 'Trench Patrol' },
-        { value: 'Infrastructure Scout', label: 'Infrastructure Scout' }
+        { value: 'Campus Perimeter Patrol', label: 'Campus Perimeter Patrol' },
+        { value: 'Crowd Monitoring', label: 'Crowd Monitoring' },
+        { value: 'Building Inspection', label: 'Building Inspection' },
+        { value: 'Emergency response', label: 'Emergency response' },
+        { value: 'Parking Lot Surveillance', label: 'Parking Lot Surveillance' }
       ]);
     const [errorMessage, setErrorMessage] = useState("");
     let userdetails=JSON.parse(window.sessionStorage.getItem("userdetails"));

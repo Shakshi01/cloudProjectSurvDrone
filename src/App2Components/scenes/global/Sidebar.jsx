@@ -250,14 +250,14 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Add Farm Map"
+              title="Add Campus Map"
               to="/dashboard/addMap"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Get Farm Maps"
+              title="Get Campus Maps"
               to="/dashboard/getMaps"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}

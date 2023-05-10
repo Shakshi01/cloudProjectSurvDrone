@@ -21,3 +21,11 @@
     text-decoration: none;
     padding: 2px 8px;
   }
+
+  .video-link{
+    padding: 25px;
+    font-weight: 500;
+    font-size: xx-large;
+    font-style: italic;
+    color: beige;
+  }

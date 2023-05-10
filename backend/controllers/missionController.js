@@ -1,4 +1,5 @@
 const Mission=require('../models/missionModel');
+const planModel = require('../models/planModel');
 const jwt=require('jsonwebtoken');
   
 
@@ -45,7 +46,7 @@ const ViewMission=async(req,res,next)=>{
   const CountMissions=async(req,res,next)=>{
     let missionscount;
     try{
-      missionscount= await Mission.count({});
+      missionscount= await planModel.count({});
       console.log("Count of missions:",missionscount);
     }
     catch(err){

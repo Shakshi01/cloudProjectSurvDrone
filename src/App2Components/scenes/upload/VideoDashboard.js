@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
+import Header from "../../components/Header";
 
 import './Dashboard.css';
 
@@ -28,8 +29,8 @@ class VideoDashboard extends React.Component {
 
     const videos = this.state.videoList.map(video => {
       return (
-        <div className="" key={video._id}>
-          <Link to={'http://localhost:5001/api/videos/' + video.upload_title + ".mp4"}>
+        <div className="video-link" key={video._id}>
+          <Link variant to={'http://localhost:5001/api/videos/' + video.upload_title + ".mp4"}>
           {video.upload_title.replace(/_/g, ' ')}
           </Link>
           <br/>
@@ -39,8 +40,8 @@ class VideoDashboard extends React.Component {
 
     return (
         <div className="container mt-5">
-          <h4>Videos</h4>
-          <div className="">
+          <Header title="Videos" />
+          <div className="video-list">
             {videos}
           </div>
         </div>

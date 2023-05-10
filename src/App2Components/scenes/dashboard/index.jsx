@@ -48,12 +48,15 @@ const Dashboard = () => {
     return res.data;
   };
 
+  let userdetails=JSON.parse(window.sessionStorage.getItem("userdetails"));
+  const TenantId=userdetails.email;
+
   const sendRequest3 = async () => {
     const res = await axios.get(
-      "http://localhost:5001/api/getmissions"
+      `http://localhost:5001/api/getAllMissionPlans/${TenantId}`
     );
-    console.log('Data received from backend:', res.data.missions);
-    return res.data.missions;
+    console.log('Data received from backendmission:', res.data);
+    return res.data;
   };
 
   useEffect(() => {
@@ -66,6 +69,7 @@ const Dashboard = () => {
       setusercount(data1);
       setmissioncount(data2);
       setmissions(data3);
+      console.log("DATA3:",data3);
     }
     fetchData();
   }, []);
@@ -298,7 +302,7 @@ const Dashboard = () => {
           </Box>
           {missions.map((mission, i) => (
             <Box
-              key={`${mission.mission_id}-${i}`}
+              key={`${mission._id}-${i}`}
               display="flex"
               justifyContent="space-between"
               alignItems="center"
@@ -311,10 +315,10 @@ const Dashboard = () => {
                   variant="h5"
                   fontWeight="600"
                 >
-                  {mission.mission_id}
+                  {mission.MissionId}
                 </Typography>
                 <Typography color={colors.grey[900]}>
-                  {mission.location}
+                  {mission.Location}
                 </Typography>
               </Box>
               <Box color={colors.grey[900]}>{mission.drone_id}</Box>
@@ -323,7 +327,7 @@ const Dashboard = () => {
                 p="5px 10px"
                 borderRadius="4px"
               >
-                {mission.status}
+                {mission.TenantId}
               </Box>
             </Box>
           ))}

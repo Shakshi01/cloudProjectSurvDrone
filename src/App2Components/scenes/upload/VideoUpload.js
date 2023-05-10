@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import { Progress } from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
+import Header from "../../components/Header";
+import { Box, Button, TextField } from "@mui/material";
 
 import 'react-toastify/dist/ReactToastify.css';
 import './Upload.css';
@@ -70,7 +72,7 @@ class Upload extends React.Component {
           <div className="form-group">
             <ToastContainer />
           </div>
-          <h4>Upload Video</h4>
+          <Header title="Add New Video" />
           <hr className="my-4" />
 
           <form method="post" name="videoUpload" action="/api/upload" id="#" encType="multipart/form-data">

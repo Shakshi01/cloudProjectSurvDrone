@@ -14,7 +14,7 @@ import { Button, IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MapIcon from "@mui/icons-material/Map";
-import { format } from 'date-fns';
+
 
 
 const ViewDrone = () => {
@@ -22,22 +22,10 @@ const ViewDrone = () => {
   const colors = tokens(theme.palette.mode);
   const navigate = useNavigate();
   const [docs, setDocs] = useState([]);
-  const [docs2, setDocs2] = useState([]);
-  const [mergeddocs, setMergedDocs] = useState([]);
-
 
   const sendRequest = async () => {
     const res = await axios.get(
       "http://localhost:5001/api/viewdrone",
-      { withCredentials: true }
-    );
-    console.log('Data received from backend:', res.data);
-    return res.data;
-  };
-
-  const sendRequest2 = async () => {
-    const res = await axios.get(
-      "http://localhost:5001/api/viewschedule",
       { withCredentials: true }
     );
     console.log('Data received from backend:', res.data);
@@ -75,70 +63,32 @@ const ViewDrone = () => {
     await deleteDrone(id);
   };
   
-  useEffect(() => {
-  async function fetchData() {
-    const data = await sendRequest();
-    const formattedData = data.map((item) => {
-      const { _id, __v, ...rest } = item;
-      return {
-        ...rest,
-        location:"SanJose",
-        status:"Completed",
-      };
-    });
-    setDocs(formattedData);
-    console.log('Formatted data:', formattedData);
-  }
-  fetchData();
-}, []);
-
-useEffect(() => {
-  async function fetchData() {
-    const data = await sendRequest2();
-    const formattedData = data.map((item) => {
-      const { _id, __v, ...rest } = item;
-      return {
-        ...rest,
-        start_time: format(new Date(item.start_time), 'yyyy/MM/dd HH:mm:ss'),
-        end_time: format(new Date(item.end_time), 'yyyy/MM/dd HH:mm:ss'),
-      };
-    });
-    setDocs2(formattedData);
-    console.log('Formatted data:', formattedData);
-  }
-  fetchData();
-}, []);
-
-useEffect(() => {
-  console.log("docs11:",docs);
-  console.log("docs211:",docs2);
-  console.log(docs2.find(item => item.drone_id === "D001")?.mission_id)
-  const mergedDocs = docs.map((row) => ({
-    ...row,
-    mission: docs2.find(item => item.drone_id === row.drone_id)?.mission_id || "",
-    start_time: docs2.find(item => item.drone_id === row.drone_id)?.start_time || "",
-    end_time: docs2.find(item => item.drone_id === row.drone_id)?.end_time || "",
-  }));
-  console.log(mergedDocs);
-  setMergedDocs(mergedDocs);
-  //setDocs(mergedDocs);
-}, [docs, docs2]);
-
-
-
-  console.log("docs:",docs);
-  console.log("docs2:",docs2);
-  console.log("mergeddocs:",mergeddocs);
-  const mergedDocs = [...docs, ...docs2];
-  //mission2:docs2.filter(item => item.drone_id == formattedData["drone_id"])["mission_id"],
   
-
+  
+  useEffect(() => {
+    async function fetchData() {
+      const data = await sendRequest();
+      const formattedData = data.map((item) => {
+        const { _id, __v, ...rest } = item;
+        return {
+          ...rest,
+          mission:"M001",
+          location:"SanJose",
+          status:"Completed",
+        };
+      });
+      setDocs(formattedData);
+      console.log('Formatted data:', formattedData);
+    }
+    fetchData();
+  }, []);
+  
   const columns = [
-    { field: "drone_id", headerName: "DroneId",flex: 0.3 },
+    { field: "drone_id", headerName: "DroneId" },
     {
       field: "name",
       headerName: "Drone Name",
-      flex: 0.3,
+      flex: 0.5,
       //cellClassName: "name-column--cell",
     },
     // {
@@ -147,40 +97,30 @@ useEffect(() => {
     //   flex: 1,
     //   cellClassName: "name-column--cell",
     // },
-    // {
-    //   field: "model_number",
-    //   headerName: "Model_number",
-    //   flex: 0.4,
-    // },
+    {
+      field: "model_number",
+      headerName: "Model_number",
+      flex: 0.5,
+    },
     {
       field: "price",
       headerName: "Price",
-      flex: 0.3,
+      flex: 0.5,
     },
     {
       field: "mission",
       headerName: "Latest Mission",
-      flex: 0.4,
+      flex: 0.5,
     },
     {
       field: "location",
       headerName: "Location",
-      flex: 0.4,
+      flex: 0.5,
     },
     {
       field: "status",
       headerName: "Status",
-      flex: 0.4,
-    },
-    {
-      field: "start_time",
-      headerName: "StartTime",
-      flex: 0.6,
-    },
-    {
-      field: "end_time",
-      headerName: "EndTime",
-      flex: 0.6,
+      flex: 0.5,
     },
     {
       field: "actions",
@@ -193,14 +133,14 @@ useEffect(() => {
           <IconButton
             color="primary"
             onClick={() => handleExplore(params.row)}
-            sx={{ marginRight: "-24px" }}
+            sx={{ marginRight: "-18px" }}
           >
             <MapIcon style={{ color: "green" }} />
           </IconButton>
           <IconButton
             color="primary"
             onClick={() => handleEdit(params.row)}
-            sx={{ marginRight: "-24px" }}
+            sx={{ marginRight: "-18px" }}
           >
             <EditIcon style={{ color: "white" }} />
           </IconButton>
@@ -248,7 +188,7 @@ useEffect(() => {
             },
           }}
         >
-          <DataGrid checkboxSelection rows={mergeddocs} columns={columns} getRowId={(row) => row.drone_id} />
+          <DataGrid checkboxSelection rows={docs} columns={columns} getRowId={(row) => row.drone_id} />
         </Box>
         :
         <Typography>Loading...</Typography>

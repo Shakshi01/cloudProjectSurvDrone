@@ -77,7 +77,7 @@ function AddMapForm() {
                         <input type="text" id="Lat" name="Lat" value={location.lat} onChange={handleChange} />
                         <br />
                         <label for="Long">Longitude</label>
-                        <input type="text" id="Long" name="Long" value={location.lat} onChange={handleChange} />
+                        <input type="text" id="Long" name="Long" value={location.lng} onChange={handleChange} />
                         <br />
                         <input type="submit" value="Add New Map" />
                         <Map1 location={location} setLocation={setLocation}/>

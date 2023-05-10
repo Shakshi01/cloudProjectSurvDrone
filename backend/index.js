@@ -17,6 +17,9 @@ app.use(cookieParser());
 
 connectDb();
 app.use('/api',router);
+app.use('/api/upload', require('./controllers/upload'));
+app.use('/api/videoList', require('./controllers/videoList'));
+app.use('/api/videos', express.static('media/uploads'));
 app.get("/",(req,res)=>{
     res.send("API running");
 })

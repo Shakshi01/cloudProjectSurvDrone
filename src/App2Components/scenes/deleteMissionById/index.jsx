@@ -1,15 +1,16 @@
 import React, {useState} from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-import TenantIdSingleton from "../../components/TenantId";
 
 function DeleteMissionById() {
 
     const navigate = useNavigate();
+    let userdetails=JSON.parse(window.sessionStorage.getItem("userdetails"));
+    const TenantId=userdetails.email;
 
     const [missionPlan, setMissionPlan] = useState({
         MissionId: "",
-        TenantId: TenantIdSingleton.id
+        TenantId: TenantId
     });
 
     const handleChange = (e) => {

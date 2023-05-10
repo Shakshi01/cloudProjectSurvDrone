@@ -41,15 +41,14 @@ function CreateMission() {
     console.log("Co-ords from child:",coords);
 
     
-    const handleLocationChange=(e)=>{
-        console.log(e)
-        console.log(e.target.value)
-        let maps=JSON.parse(window.sessionStorage.getItem("maps"));
-        const activemap=maps.filter(map=> e.target.value==map.Name);
-        console.log("AM:",activemap)
-        setCoords({lat:activemap[0].Lat,lng:activemap[0].Long});
-        console.log("C:",coords)
-    }
+    const handleLocationChange = (e) => {
+        let maps = JSON.parse(window.sessionStorage.getItem("maps"));
+        const activeMap = maps.filter((map) => e.target.value == map.Name);
+        console.log("AM:", activeMap);
+        setCoords({ lat: activeMap[0].Lat, lng: activeMap[0].Long });
+        console.log("C:", coords);
+      };
+      
     
 
     useEffect(() => {
@@ -58,7 +57,6 @@ function CreateMission() {
         .then(data => {setMaps(data); console.log("MAPS:",data);window.sessionStorage.setItem("maps",JSON.stringify(data));});
     }, []);
     useEffect(()=>{
-
     },[coords])
 
 
@@ -163,32 +161,29 @@ function CreateMission() {
                                 >
                                     <InputLabel htmlFor="Location">Service Location</InputLabel>
                                     <Select
-                                    label="Location"
-                                    value={values.Location}
-                                    onChange={handleLocationChange}
-                                    onBlur={handleBlur}
-                                    inputProps={{
-                                        name: "Location",
-                                        id: "Location",
-                                    }}
+                                        label="Location"
+                                        value={values.Location}
+                                        onChange={(e) => {
+                                            handleLocationChange(e);
+                                            handleChange(e);
+                                          }}
+                                        onBlur={handleBlur}
+                                        inputProps={{
+                                            name: "Location",
+                                            id: "Location",
+                                        }}
                                     >
-                                    {maps.map((option) => (
-                                        <MenuItem key={option.id} value={option.id}>
-                                        {option.Name}
+                                        <MenuItem disabled value="">
+                                            Choose Location
                                         </MenuItem>
-                                    ))}
+                                        {maps.map((option) => (
+                                            <MenuItem key={option.Name} value={option.Name}>
+                                                {option.Name}
+                                            </MenuItem>
+                                        ))}
                                     </Select>
-                                    <FormHelperText>
-                                    {touched.Location && errors.Location}
-                                    </FormHelperText>
+                                    <FormHelperText>{touched.Location && errors.Location}</FormHelperText>
                                 </FormControl>
-                                <label>Select service location:</label>
-                                <select name='Location' value={values.Location} onChange={handleLocationChange}>
-                                    <option disabled={true} value="">Choose Location</option>
-                                    {maps.map((maps) => {
-                                        return (<option key={maps.id} value={maps.id}>{maps.Name}</option>)
-                                    })}
-                                </select>
                                 <TextField
                                     fullWidth
                                     variant="filled"
@@ -225,7 +220,7 @@ function CreateMission() {
 const checkoutSchema = yup.object().shape({
     MissionId: yup.string().required("required"),
     MissionType: yup.string().required("required"),
-    //Location: yup.string().required("required"),
+    Location: yup.string().required("required"),
     //FlightPlanCooridnates: yup.string().required("required"),
     FlightHeight: yup.string().required("required"),
     //Alerts:yup.string().required("required"),

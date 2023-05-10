@@ -2,6 +2,8 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Header from "../../components/Header";
+import { Box, Button, TextField, FormControl, InputLabel, Select, MenuItem, FormHelperText, Typography } from "@mui/material";
+
 
 import './Dashboard.css';
 
@@ -30,6 +32,10 @@ class VideoDashboard extends React.Component {
     const videos = this.state.videoList.map(video => {
       return (
         <div className="video-link" key={video._id}>
+          <p>Mission Id</p>
+          <p>{video.mission}</p>
+          <p>Time</p>
+          <p>{video.createdAt}</p>
           <Link variant to={'http://localhost:5001/api/videos/' + video.upload_title + ".mp4"}>
           {video.upload_title.replace(/_/g, ' ')}
           </Link>
@@ -40,7 +46,7 @@ class VideoDashboard extends React.Component {
 
     return (
         <div className="container mt-5">
-          <Header title="Videos" />
+          <Header title="Video" />
           <div className="video-list">
             {videos}
           </div>

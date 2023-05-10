@@ -14,6 +14,7 @@ import {ViewDronePage,CreateDronePage,EditDronePage,ViewDroneStatistics} from '.
 import {GetMissionsPage,CreateMissionPage, GetFarmsPage, CreateMapPage} from './App2Components/App';
 import {ViewDashboard,ViewSchedulePage,CreateSchedulePage,EditSchedulePage} from './App2Components/App';
 import {ViewBar,ViewPie,ViewLine,ViewFaq,ViewGeography,ViewContacts,ViewCalendar} from './App2Components/App';
+import {GetVideoDashboard,UploadPage} from './App2Components/App';
 
 import Topbar from "./App2Components/scenes/global/Topbar";
 import Sidebar from "./App2Components/scenes/global/Sidebar";
@@ -35,8 +36,6 @@ import CreateMission from './App2Components/scenes/createMission';
 import AddMapForm from './App2Components/scenes/addMap';
 import GetAllMissions from './App2Components/scenes/getMissions';
 import GetAllMaps from './App2Components/scenes/getFarmMaps';
-import Upload from './App2Components/scenes/upload/VideoUpload';
-import VideoDashboard from './App2Components/scenes/upload/VideoDashboard';
 
 
 function AppContent() {
@@ -73,8 +72,8 @@ function AppContent() {
         <Route path="/dashboard/addMap" element={<CreateMapPage />} />
         <Route path="/dashboard/getMissions" element={<GetMissionsPage />} />
         <Route path="/dashboard/getMaps" element={<GetFarmsPage />} />
-        <Route path="/dashboard/uploadVideo" element={<Upload/>} />
-        <Route path="/dashboard/videos" element={<VideoDashboard/>} />
+        <Route path="/dashboard/uploadVideo" element={<UploadPage/>} />
+        <Route path="/dashboard/videos" element={<GetVideoDashboard/>} />
       </Routes>
     </div>
   );

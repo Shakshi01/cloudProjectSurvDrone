@@ -27,6 +27,8 @@ import CreateMission from "./scenes/createMission";
 import AddMapForm from "./scenes/addMap";
 import GetAllMissions from "./scenes/getMissions";
 import GetAllMaps from "./scenes/getFarmMaps";
+import VideoDashboard from './scenes/upload/VideoDashboard';
+import Upload from './scenes/upload/VideoUpload';
 
 import './App.css';
 
@@ -515,6 +517,58 @@ export function GetFarmsPage() {
               <main className="content">
                 <Routes>
                   <Route path="/" element={<GetAllMaps />} />
+                </Routes>
+              </main>
+            </div>
+          </div>
+        </div>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
+}
+
+export function UploadPage() {
+  const [theme, colorMode] = useMode();
+  const [isSidebar, setIsSidebar] = useState(true);
+  
+  return (
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="app3">
+          <div className="main-container">
+            <Topbar setIsSidebar={setIsSidebar} />
+            <div className="content-container">
+              <Sidebar isSidebar={isSidebar} />
+              <main className="content">
+                <Routes>
+                  <Route path="/" element={<Upload/>} />
+                </Routes>
+              </main>
+            </div>
+          </div>
+        </div>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
+}
+
+export function GetVideoDashboard() {
+  const [theme, colorMode] = useMode();
+  const [isSidebar, setIsSidebar] = useState(true);
+  
+  return (
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="app3">
+          <div className="main-container">
+            <Topbar setIsSidebar={setIsSidebar} />
+            <div className="content-container">
+              <Sidebar isSidebar={isSidebar} />
+              <main className="content">
+                <Routes>
+                  <Route path="/" element={<VideoDashboard />} />
                 </Routes>
               </main>
             </div>

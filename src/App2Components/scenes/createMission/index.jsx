@@ -182,7 +182,13 @@ function CreateMission() {
                                     {touched.Location && errors.Location}
                                     </FormHelperText>
                                 </FormControl>
-
+                                <label>Select service location:</label>
+                                <select name='Location' value={values.Location} onChange={handleLocationChange}>
+                                    <option disabled={true} value="">Choose Location</option>
+                                    {maps.map((maps) => {
+                                        return (<option key={maps.id} value={maps.id}>{maps.Name}</option>)
+                                    })}
+                                </select>
                                 <TextField
                                     fullWidth
                                     variant="filled"

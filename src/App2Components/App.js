@@ -23,6 +23,7 @@ import ViewSchedule from "./scenes/ViewScheules";
 import CreateSchedule from "./scenes/CreateSchedule";
 import Calendar from "./scenes/calendar";
 import DroneStatistics from "./components/DroneStatistics";
+import TrackDrone from "./scenes/trackDrone";
 import CreateMission from "./scenes/createMission";
 import AddMapForm from "./scenes/addMap";
 import GetAllMissions from "./scenes/getMissions";
@@ -154,6 +155,32 @@ export function ViewDroneStatistics() {
               <main className="content">
                 <Routes>
                   <Route path="/" element={<DroneStatistics />} />
+                </Routes>
+              </main>
+            </div>
+          </div>
+        </div>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
+}
+
+export function TrackDronePage() {
+  const [theme, colorMode] = useMode();
+  const [isSidebar, setIsSidebar] = useState(true);
+  
+  return (
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="app3">
+          <div className="main-container">
+            <Topbar setIsSidebar={setIsSidebar} />
+            <div className="content-container">
+              <Sidebar isSidebar={isSidebar} />
+              <main className="content">
+                <Routes>
+                  <Route path="/" element={<TrackDrone />} />
                 </Routes>
               </main>
             </div>

@@ -194,14 +194,14 @@ const Sidebar = () => {
               Device Management
             </Typography>
             <Item
-              title="View Drone"
+              title="Drone Catalog"
               to="/dashboard/viewDrone"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Create Drone"
+              title="Add New Drone"
               to="/dashboard/createDrone"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}

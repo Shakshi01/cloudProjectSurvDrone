@@ -217,7 +217,7 @@ useEffect(() => {
 
   return (
     <Box m="20px">
-      <Header title="View Drone" />
+      <Header title="Drone Catalog" />
       {docs.length > 0 ?
         <Box
           m="40px 0 0 0"

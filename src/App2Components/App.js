@@ -23,6 +23,7 @@ import ViewSchedule from "./scenes/ViewScheules";
 import CreateSchedule from "./scenes/CreateSchedule";
 import Calendar from "./scenes/calendar";
 import DroneStatistics from "./components/DroneStatistics";
+// import ViewMissionPlanner from "./components/MissionPlanner";
 
 import './App.css';
 
@@ -415,5 +416,13 @@ export function ViewCalendar() {
         </div>
       </ThemeProvider>
     </ColorModeContext.Provider>
+  );
+}
+
+export function ViewMissionPlanner() {
+  return (
+    <div>
+      <h1>Test Mission Planner Page</h1>
+    </div>
   );
 }

@@ -1,4 +1,5 @@
 # Installation
+Install for the backend, then the frontend.
 ```
 npm install
 npm install @mui/icons-material

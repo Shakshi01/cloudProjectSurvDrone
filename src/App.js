@@ -12,7 +12,7 @@ import LoginPage from './components/pages/LoginPage';
 import RegisterPage from './components/pages/RegisterPage';
 import {ViewDronePage,CreateDronePage,EditDronePage,ViewDroneStatistics} from './App2Components/App';
 import {ViewDashboard,ViewSchedulePage,CreateSchedulePage,EditSchedulePage} from './App2Components/App';
-import {ViewBar,ViewPie,ViewLine,ViewFaq,ViewGeography,ViewContacts,ViewCalendar} from './App2Components/App';
+import {ViewBar,ViewPie,ViewLine,ViewFaq,ViewGeography,ViewContacts,ViewCalendar,ViewMissionPlanner} from './App2Components/App';
 
 import Topbar from "./App2Components/scenes/global/Topbar";
 import Sidebar from "./App2Components/scenes/global/Sidebar";
@@ -62,6 +62,7 @@ function AppContent() {
         <Route path="/dashboard/geography" element={<ViewGeography />} />
         <Route path="/dashboard/contacts" element={<ViewContacts />} />
         <Route path="dashboard/calendar" element={<ViewCalendar />} />
+        <Route path="/dashboard/missionPlanner" element={<ViewMissionPlanner />} />
       </Routes>
     </div>
   );

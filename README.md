@@ -9,7 +9,7 @@ npm install
 ```
 
 # Run
-From root folder:
+From top-level folder:
 ```
 npm start
 ```

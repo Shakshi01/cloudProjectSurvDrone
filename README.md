@@ -1,3 +1,19 @@
+# Installation
+```
+npm install
+npm install @mui/icons-material
+npm install @emotion/styled
+npm i @nivo/bar@0.59.1 --force
+cd backend
+npm install
+```
+
+# Run
+From root folder:
+```
+npm start
+```
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

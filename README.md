@@ -9,8 +9,11 @@ npm install
 ```
 
 # Run
-From top-level folder:
+From top-level folder, e.g. `cloudProjectSurvDrone`:
 ```
+cd backend
+node index.js
+cd ..
 npm start
 ```
 

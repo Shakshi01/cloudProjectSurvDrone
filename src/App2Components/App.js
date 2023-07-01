@@ -23,7 +23,9 @@ import ViewSchedule from "./scenes/ViewScheules";
 import CreateSchedule from "./scenes/CreateSchedule";
 import Calendar from "./scenes/calendar";
 import DroneStatistics from "./components/DroneStatistics";
-// import ViewMissionPlanner from "./components/MissionPlanner";
+
+import { Viewer, Entity } from "resium";
+import { Cartesian3 } from "cesium";
 
 import './App.css';
 
@@ -421,8 +423,20 @@ export function ViewCalendar() {
 
 export function ViewMissionPlanner() {
   return (
-    <div>
-      <h1>Test Mission Planner Page</h1>
-    </div>
+    <Viewer full>
+
+        <Entity
+
+          name="tokyo"
+
+          position={Cartesian3.fromDegrees(139.767052, 35.681167, 100)}
+
+          point={{ pixelSize: 10 }}>
+
+          test
+
+        </Entity>
+
+      </Viewer>
   );
 }

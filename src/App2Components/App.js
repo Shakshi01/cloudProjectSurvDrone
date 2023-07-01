@@ -422,21 +422,32 @@ export function ViewCalendar() {
 }
 
 export function ViewMissionPlanner() {
+  const [theme, colorMode] = useMode();
+  const [isSidebar, setIsSidebar] = useState(true);
+
   return (
-    <Viewer full>
-
-        <Entity
-
-          name="tokyo"
-
-          position={Cartesian3.fromDegrees(139.767052, 35.681167, 100)}
-
-          point={{ pixelSize: 10 }}>
-
-          test
-
-        </Entity>
-
-      </Viewer>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="app3">
+          <div className="main-container">
+            <Topbar setIsSidebar={setIsSidebar} />
+            <div className="content-container">
+              <Sidebar isSidebar={isSidebar} />
+              <main className="content">
+              <Viewer full>
+                <Entity
+                  name="tokyo"
+                  position={Cartesian3.fromDegrees(139.767052, 35.681167, 100)}
+                  point={{ pixelSize: 10 }}>
+                  test
+                </Entity>
+              </Viewer>
+              </main>
+            </div>
+          </div>
+        </div>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
   );
 }

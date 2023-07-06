@@ -11,7 +11,7 @@ import HeroSection from './components/HeroSection';
 import LoginPage from './components/pages/LoginPage';
 import RegisterPage from './components/pages/RegisterPage';
 import {ViewDronePage,CreateDronePage,EditDronePage,ViewDroneStatistics, TrackDronePage} from './App2Components/App';
-import {GetMissionsPage,CreateMissionPage, GetFarmsPage, CreateMapPage} from './App2Components/App';
+import {GetMissionsPage,CreateMissionPage, GetFarmsPage, CreateMapPage, ViewMissionPlanner} from './App2Components/App';
 import {ViewDashboard,ViewSchedulePage,CreateSchedulePage,EditSchedulePage} from './App2Components/App';
 import {ViewBar,ViewPie,ViewLine,ViewFaq,ViewGeography,ViewContacts,ViewCalendar} from './App2Components/App';
 import {GetVideoDashboard,UploadPage} from './App2Components/App';
@@ -75,6 +75,7 @@ function AppContent() {
         <Route path="/dashboard/getMaps" element={<GetFarmsPage />} />
         <Route path="/dashboard/uploadVideo" element={<UploadPage/>} />
         <Route path="/dashboard/videos" element={<GetVideoDashboard/>} />
+        <Route path="/dashboard/missionPlanner" element={<ViewMissionPlanner/>} />
       </Routes>
     </div>
   );

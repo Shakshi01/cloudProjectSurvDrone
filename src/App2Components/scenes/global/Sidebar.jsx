@@ -243,6 +243,13 @@ const Sidebar = () => {
               Mission Planner
             </Typography>
             <Item
+              title="Mission Planner"
+              to="/dashboard/missionPlanner"
+              icon={<ReceiptOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
               title="Create Mission"
               to="/dashboard/createMission"
               icon={<ReceiptOutlinedIcon />}

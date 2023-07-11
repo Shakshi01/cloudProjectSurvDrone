@@ -30,9 +30,7 @@ import GetAllMissions from "./scenes/getMissions";
 import GetAllMaps from "./scenes/getFarmMaps";
 import VideoDashboard from './scenes/upload/VideoDashboard';
 import Upload from './scenes/upload/VideoUpload';
-
-import { Viewer, Entity } from "resium";
-import { Cartesian3 } from "cesium";
+import MissionPlanner from './scenes/MissionPlanner'
 
 import './App.css';
 
@@ -623,14 +621,9 @@ export function ViewMissionPlanner() {
             <div className="content-container">
               <Sidebar isSidebar={isSidebar} />
               <main className="content">
-              <Viewer full>
-                <Entity
-                  name="tokyo"
-                  position={Cartesian3.fromDegrees(139.767052, 35.681167, 100)}
-                  point={{ pixelSize: 10 }}>
-                  test
-                </Entity>
-              </Viewer>
+                <Routes>
+                  <Route path="/" element={<MissionPlanner />} />
+                </Routes>
               </main>
             </div>
           </div>

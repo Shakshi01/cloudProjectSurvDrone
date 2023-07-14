@@ -7,6 +7,9 @@ npm install @mui/icons-material
 npm install @emotion/styled
 npm i @nivo/bar@0.59.1 --force
 npm install @craco/craco craco-cesium cesium resium
+npm i @react-google-maps/api --force
+npm i reactstrap
+npm i react-toastify
 ```
 
 Then the backend folder `backend`:
@@ -14,10 +17,6 @@ Then the backend folder `backend`:
 cd backend
 npm install
 npm i multer
-cd ./cloudProjectSurvDrone
-npm i @react-google-maps/api --force
-npm i reactstrap
-npm i react-toastify
 ```
 
 # Run

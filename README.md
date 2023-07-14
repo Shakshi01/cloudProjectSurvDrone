@@ -1,3 +1,38 @@
+# Installation
+Install for the frontend folder `cloudProjectSurvDrone`:
+```
+cd ./cloudProjectSurvDrone
+npm install
+npm install @mui/icons-material
+npm install @emotion/styled
+npm i @nivo/bar@0.59.1 --force
+npm install @craco/craco craco-cesium cesium resium
+```
+
+Then the backend folder `backend`:
+```
+cd backend
+npm install
+npm i multer
+cd ./cloudProjectSurvDrone
+npm i @react-google-maps/api --force
+npm i reactstrap
+npm i react-toastify
+```
+
+# Run
+Open a new terminal to start backend:
+```
+cd backend
+node index.js
+```
+
+Open another terminal to start frontend. From `cloudProjectSurvDrone`:
+```
+cd ./cloudProjectSurvDrone
+npm start
+```
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

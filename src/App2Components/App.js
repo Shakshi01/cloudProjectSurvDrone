@@ -24,11 +24,16 @@ import CreateSchedule from "./scenes/CreateSchedule";
 import Calendar from "./scenes/calendar";
 import DroneStatistics from "./components/DroneStatistics";
 
+import { useRef, useEffect } from "react";
 import { Viewer, Entity } from "resium";
-import { Cartesian3 } from "cesium";
+import { Cartesian3, Color, IonResource } from "cesium";
+import { createWorldTerrainAsync, createOsmBuildings, Cesium3DTileStyle, Cesium3DTileset, Ion} from "cesium";
 
 import './App.css';
 
+// Add Cesium OSM Buildings.
+Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI4NmNjZmViMS04MTAwLTQ5NjQtYTdiYi0zODRmYTM5NWRjYzIiLCJpZCI6ODcyODAsImlhdCI6MTY0ODQ0NzY1OH0.KyD7w6STyR5RhWl5JaDQW-p_gWTmwT6aI1CrW7SBzP8";
+const tileset = await Cesium3DTileset.fromIonAssetId(96188);
 
 export function ViewDashboard() {
   const [theme, colorMode] = useMode();
@@ -425,6 +430,26 @@ export function ViewMissionPlanner() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
 
+  const viewerRef = useRef();
+
+  useEffect(() => {
+
+    if (viewerRef.current) {
+      
+      const csEl = viewerRef.current.cesiumElement;
+
+      var sjsu = csEl.entities.add({
+        position : Cartesian3.fromDegrees(-121.885126, 37.335458, 1000),
+        point : {
+          pixelSize : 100,
+          color: Color.YELLOW
+        }
+      });
+      
+      csEl.scene.primitives.add(tileset)
+    }
+  }, []);
+  
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
@@ -435,14 +460,11 @@ export function ViewMissionPlanner() {
             <div className="content-container">
               <Sidebar isSidebar={isSidebar} />
               <main className="content">
-              <Viewer full>
-                <Entity
-                  name="tokyo"
-                  position={Cartesian3.fromDegrees(139.767052, 35.681167, 100)}
-                  point={{ pixelSize: 10 }}>
-                  test
-                </Entity>
+
+              <Viewer ref={viewerRef} full >
+        
               </Viewer>
+
               </main>
             </div>
           </div>

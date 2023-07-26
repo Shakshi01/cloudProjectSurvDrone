@@ -3,5 +3,11 @@ module.exports = {
       {
         plugin: require("craco-cesium")()
       }
-    ]
+    ], webpack: {
+      configure: {
+        experiments: {
+          topLevelAwait: true,
+        },
+      },
+    },
   };

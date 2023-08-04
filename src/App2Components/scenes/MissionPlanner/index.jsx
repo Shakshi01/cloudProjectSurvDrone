@@ -1,11 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Viewer, Entity, CameraFlyTo, PolylineGraphics } from "resium";
-import { Cartesian3, BingMapsImageryProvider, Color, ColorMaterialProperty, PolylineDashMaterialProperty, IonResource} from "cesium";
-import { createWorldTerrainAsync, createOsmBuildings, Cesium3DTileStyle, Cesium3DTileset, Ion} from "cesium";
-
-// Add Cesium OSM Buildings.
-Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI4NmNjZmViMS04MTAwLTQ5NjQtYTdiYi0zODRmYTM5NWRjYzIiLCJpZCI6ODcyODAsImlhdCI6MTY0ODQ0NzY1OH0.KyD7w6STyR5RhWl5JaDQW-p_gWTmwT6aI1CrW7SBzP8";
-const tileset = await Cesium3DTileset.fromIonAssetId(96188);
+import { Cartesian3, BingMapsImageryProvider, Color, ColorMaterialProperty, PolylineDashMaterialProperty } from "cesium";
 
 const MissionPlanner = () => {
   const [mapStyle, setMapStyle] = useState("");
@@ -16,29 +11,8 @@ const MissionPlanner = () => {
   const [selectedOption, setSelectedOption] = useState("view1");
   const [pitch, setpitch] = useState(80);
 
-  
-  //const viewerRef = useRef(null);
+  const viewerRef = useRef(null);
   const duration = 5; 
-
-  const viewerRef = useRef();
-
-  useEffect(() => {
-
-    if (viewerRef.current) {
-
-      const csEl = viewerRef.current.cesiumElement;
-
-      var sjsu = csEl.entities.add({
-        position : Cartesian3.fromDegrees(-121.885126, 37.335458, 1000),
-        point : {
-          pixelSize : 10,
-          color: Color.YELLOW
-        }
-      });
-
-      csEl.scene.primitives.add(tileset)
-    }
-  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -161,7 +135,7 @@ const points = [
   
 
   return (
-    <Viewer ref={viewerRef} full >
+    <Viewer full >
       <Entity
         name="SJSU"
         position={center}
